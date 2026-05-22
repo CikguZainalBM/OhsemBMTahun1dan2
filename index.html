@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ohsem BM – Modul SiBuDiAM Percuma!</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* PERLINDUNGAN */
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
+input,textarea{-webkit-user-select:text!important;user-select:text!important;}
+:root {
+  --or:#FF6B35; --yl:#FFD23F; --gr:#06D6A0;
+  --pu:#7B5EA7; --bl:#118AB2; --pk:#FF6B9D;
+  --dark:#1A1A2E; --card:#FFFFFF;
+  --text:#2D2D2D; --muted:#888;
+  --rad:20px; --shad:0 8px 32px rgba(0,0,0,0.10);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Nunito',sans-serif;background:#FFF9F0;color:var(--text);overflow-x:hidden;}
+
+/* ── HERO ── */
+.hero{
+  background:linear-gradient(145deg,#1A1A2E 0%,#16213E 50%,#0F3460 100%);
+  padding:40px 20px 50px;
+  text-align:center;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:220px;height:220px;
+  background:radial-gradient(circle,rgba(255,107,53,.35),transparent 70%);
+  border-radius:50%;
+}
+.hero::after{
+  content:'';position:absolute;bottom:-40px;left:-40px;
+  width:160px;height:160px;
+  background:radial-gradient(circle,rgba(6,214,160,.25),transparent 70%);
+  border-radius:50%;
+}
+
+.hero-badge{
+  display:inline-block;
+  background:rgba(255,210,63,.15);
+  border:1px solid rgba(255,210,63,.4);
+  color:var(--yl);
+  font-size:11px;font-weight:900;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 16px;border-radius:30px;margin-bottom:16px;
+  animation:fadeDown .6s ease both;
+}
+.hero h1{
+  font-family:'Fredoka One',cursive;
+  font-size:42px;line-height:1.05;
+  color:white;
+  text-shadow:0 4px 20px rgba(0,0,0,.3);
+  animation:fadeDown .7s ease .1s both;
+}
+.hero h1 span{color:var(--yl);}
+.hero h1 em{color:var(--gr);font-style:normal;}
+.hero-sub{
+  color:rgba(255,255,255,.75);font-size:15px;font-weight:700;
+  margin-top:10px;line-height:1.6;
+  animation:fadeDown .7s ease .2s both;
+}
+.hero-pills{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin:18px 0;
+  animation:fadeDown .7s ease .3s both;
+}
+.pill{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);
+  color:white;font-size:12px;font-weight:800;
+  padding:6px 14px;border-radius:30px;
+}
+.hero-cta{
+  display:inline-block;
+  background:linear-gradient(135deg,var(--or),#FF8C42);
+  color:white;font-family:'Fredoka One',cursive;font-size:20px;
+  padding:16px 36px;border-radius:50px;
+  text-decoration:none;
+  box-shadow:0 8px 28px rgba(255,107,53,.45);
+  transition:transform .15s,box-shadow .15s;
+  margin-top:6px;
+  animation:fadeDown .7s ease .4s both;
+  display:inline-block;
+}
+.hero-cta:hover{transform:translateY(-3px);box-shadow:0 14px 36px rgba(255,107,53,.5);}
+.hero-note{
+  color:rgba(255,255,255,.5);font-size:11px;font-weight:700;
+  margin-top:10px;
+  animation:fadeDown .7s ease .5s both;
+}
+
+/* FLOATING EMOJIS */
+.floaty{
+  position:absolute;font-size:28px;
+  animation:float 4s ease-in-out infinite;
+  opacity:.6;
+}
+.f1{top:20%;left:8%;animation-delay:0s;}
+.f2{top:35%;right:10%;animation-delay:1s;}
+.f3{top:65%;left:6%;animation-delay:2s;}
+.f4{top:15%;right:6%;animation-delay:1.5s;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+/* ── STATS BAR ── */
+.stats{
+  background:white;
+  display:flex;justify-content:center;gap:0;
+  flex-wrap:wrap;
+  border-bottom:3px solid #F0E8D8;
+  box-shadow:var(--shad);
+}
+.stat{
+  flex:1;min-width:100px;max-width:180px;
+  padding:16px 12px;text-align:center;
+  border-right:1px solid #F0E8D8;
+}
+.stat:last-child{border-right:none;}
+.stat .s-num{font-family:'Fredoka One',cursive;font-size:26px;color:var(--or);}
+.stat .s-lbl{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+
+/* ── SECTIONS ── */
+.section{padding:32px 16px;}
+.section-title{
+  font-family:'Fredoka One',cursive;font-size:26px;color:var(--text);
+  text-align:center;margin-bottom:6px;
+}
+.section-sub{text-align:center;font-size:14px;font-weight:700;color:var(--muted);margin-bottom:22px;}
+
+/* ── FEATURE CARDS ── */
+.feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:480px;margin:0 auto;}
+.feat{
+  background:white;border-radius:var(--rad);padding:16px;
+  box-shadow:var(--shad);text-align:center;
+  transition:transform .15s;
+}
+.feat:hover{transform:translateY(-3px);}
+.feat .f-icon{font-size:32px;margin-bottom:8px;}
+.feat .f-title{font-family:'Fredoka One',cursive;font-size:15px;color:var(--text);margin-bottom:4px;}
+.feat .f-desc{font-size:12px;font-weight:600;color:var(--muted);line-height:1.5;}
+.feat.f-highlight{background:linear-gradient(135deg,#FFF0EB,#FFF8E1);border:2px solid var(--yl);}
+
+/* ── SIBUDIAM SHOWCASE ── */
+.sib-showcase{
+  background:linear-gradient(135deg,#1A1A2E,#0F3460);
+  border-radius:var(--rad);padding:22px;margin:0 auto 16px;max-width:480px;
+}
+.sib-title{font-family:'Fredoka One',cursive;font-size:20px;color:white;text-align:center;margin-bottom:14px;}
+.sib-row{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.sib-letter{
+  width:46px;height:46px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fredoka One',cursive;font-size:20px;
+}
+.sl-si{background:#FF6B35;color:white;}
+.sl-bu{background:#FFD23F;color:#333;}
+.sl-di{background:#06D6A0;color:white;}
+.sl-a{background:#118AB2;color:white;}
+.sl-m{background:#7B5EA7;color:white;}
+.sib-info .si-word{font-size:14px;font-weight:900;color:white;}
+.sib-info .si-desc{font-size:12px;font-weight:600;color:rgba(255,255,255,.6);}
+
+/* ── TIMELINE ── */
+.timeline{max-width:480px;margin:0 auto;}
+.tl-item{display:flex;gap:14px;margin-bottom:16px;position:relative;}
+.tl-item::before{
+  content:'';position:absolute;left:20px;top:44px;
+  width:2px;height:calc(100% + 4px);
+  background:linear-gradient(#F0E8D8,transparent);
+}
+.tl-item:last-child::before{display:none;}
+.tl-dot{
+  width:42px;height:42px;border-radius:14px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Fredoka One',cursive;font-size:18px;
+  background:linear-gradient(135deg,var(--or),#FF8C42);color:white;
+  box-shadow:0 4px 12px rgba(255,107,53,.3);
+}
+.tl-content{flex:1;background:white;border-radius:16px;padding:12px 14px;box-shadow:var(--shad);}
+.tl-content .tl-day{font-size:11px;font-weight:900;color:var(--or);text-transform:uppercase;letter-spacing:1px;}
+.tl-content .tl-title{font-family:'Fredoka One',cursive;font-size:15px;color:var(--text);margin:2px 0;}
+.tl-content .tl-desc{font-size:12px;font-weight:600;color:var(--muted);line-height:1.5;}
+.tl-badge{
+  display:inline-block;background:var(--yl);color:#333;
+  font-size:10px;font-weight:900;padding:2px 8px;border-radius:8px;margin-top:4px;
+}
+
+/* ── FORM SECTION ── */
+.form-section{
+  background:linear-gradient(135deg,#1A1A2E,#0F3460);
+  padding:32px 16px;
+}
+.form-card{
+  background:white;border-radius:var(--rad);
+  padding:24px 20px;max-width:480px;margin:0 auto;
+  box-shadow:0 20px 60px rgba(0,0,0,.3);
+}
+.form-title{
+  font-family:'Fredoka One',cursive;font-size:22px;color:var(--text);
+  text-align:center;margin-bottom:4px;
+}
+.form-sub{text-align:center;font-size:13px;font-weight:700;color:var(--muted);margin-bottom:20px;}
+
+.inp-group{margin-bottom:14px;}
+.inp-label{font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;display:block;}
+.inp{
+  width:100%;border:2px solid #E8E0D0;border-radius:12px;
+  padding:12px 14px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:700;
+  color:var(--text);outline:none;transition:border-color .2s;background:#FDFCF9;
+}
+.inp:focus{border-color:var(--or);background:white;}
+.inp::placeholder{font-weight:600;color:#C0B8A8;}
+select.inp{cursor:pointer;}
+
+.form-submit{
+  width:100%;padding:16px;border:none;
+  background:linear-gradient(135deg,var(--or),#FF8C42);
+  color:white;font-family:'Fredoka One',cursive;font-size:20px;
+  border-radius:var(--rad);cursor:pointer;
+  box-shadow:0 8px 24px rgba(255,107,53,.35);
+  transition:transform .15s,box-shadow .15s;
+  margin-top:6px;
+}
+.form-submit:hover{transform:translateY(-2px);box-shadow:0 14px 32px rgba(255,107,53,.45);}
+.form-note{text-align:center;font-size:11px;font-weight:700;color:var(--muted);margin-top:10px;}
+
+/* SUCCESS STATE */
+.success-panel{
+  display:none;text-align:center;padding:10px 0;
+  animation:popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+.success-panel.show{display:block;}
+@keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.success-emoji{font-size:56px;display:block;margin-bottom:10px;}
+.success-title{font-family:'Fredoka One',cursive;font-size:24px;color:var(--or);}
+.success-msg{font-size:13px;font-weight:700;color:var(--muted);margin:8px 0 18px;line-height:1.6;}
+.access-btn{
+  display:block;width:100%;padding:15px;
+  background:linear-gradient(135deg,var(--gr),#059669);
+  color:white;font-family:'Fredoka One',cursive;font-size:19px;
+  border-radius:var(--rad);text-decoration:none;text-align:center;
+  box-shadow:0 8px 24px rgba(6,214,160,.35);
+  transition:transform .15s;margin-bottom:10px;
+}
+.access-btn:hover{transform:translateY(-2px);}
+.wa-btn{
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  width:100%;padding:13px;
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:white;font-family:'Fredoka One',cursive;font-size:17px;
+  border-radius:var(--rad);text-decoration:none;text-align:center;
+  box-shadow:0 6px 20px rgba(37,211,102,.3);
+  transition:transform .15s;
+}
+.wa-btn:hover{transform:translateY(-2px);}
+
+/* ── TESTIMONIAL ── */
+.testi-grid{display:grid;gap:12px;max-width:480px;margin:0 auto;}
+.testi{
+  background:white;border-radius:var(--rad);padding:16px;
+  box-shadow:var(--shad);position:relative;
+}
+.testi::before{
+  content:'"';font-family:'Fredoka One',cursive;font-size:60px;
+  color:var(--yl);position:absolute;top:-8px;left:14px;line-height:1;
+}
+.testi-text{font-size:13px;font-weight:700;color:var(--text);line-height:1.6;margin-top:20px;}
+.testi-name{font-size:11px;font-weight:900;color:var(--or);margin-top:8px;text-transform:uppercase;letter-spacing:.5px;}
+.testi-stars{color:var(--yl);font-size:14px;margin-top:4px;}
+
+/* ── PRICING ── */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:480px;margin:0 auto;}
+.price-card{
+  background:white;border-radius:var(--rad);padding:18px;
+  box-shadow:var(--shad);text-align:center;
+  border:2px solid transparent;
+}
+.price-card.featured{
+  border-color:var(--or);
+  background:linear-gradient(135deg,#FFF0EB,#FFF8E1);
+  position:relative;
+}
+.price-card.featured::before{
+  content:'⭐ Popular';
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  background:var(--or);color:white;
+  font-size:11px;font-weight:900;padding:3px 12px;border-radius:20px;
+  white-space:nowrap;
+}
+.price-tag{font-family:'Fredoka One',cursive;font-size:28px;color:var(--or);}
+.price-name{font-family:'Fredoka One',cursive;font-size:16px;margin:4px 0;}
+.price-list{list-style:none;text-align:left;margin:10px 0;font-size:12px;font-weight:700;color:var(--muted);}
+.price-list li{padding:4px 0;display:flex;gap:6px;align-items:flex-start;}
+.price-list li::before{content:'✅';font-size:11px;flex-shrink:0;}
+.price-list li.no::before{content:'❌';}
+
+/* ── FOOTER ── */
+.footer{
+  background:var(--dark);padding:28px 20px;text-align:center;
+}
+.footer h3{font-family:'Fredoka One',cursive;font-size:22px;color:var(--yl);margin-bottom:6px;}
+.footer p{font-size:12px;font-weight:700;color:rgba(255,255,255,.5);line-height:1.7;}
+.footer-links{display:flex;justify-content:center;gap:16px;margin-top:12px;flex-wrap:wrap;}
+.footer-links a{font-size:12px;font-weight:800;color:rgba(255,255,255,.6);text-decoration:none;}
+
+/* ── STICKY CTA ── */
+.sticky-cta{
+  position:fixed;bottom:0;left:0;right:0;
+  background:linear-gradient(135deg,var(--or),#FF8C42);
+  padding:12px 20px;text-align:center;
+  box-shadow:0 -4px 20px rgba(255,107,53,.3);
+  z-index:100;
+  transform:translateY(100%);
+  transition:transform .3s;
+}
+.sticky-cta.show{transform:translateY(0);}
+.sticky-cta a{
+  color:white;font-family:'Fredoka One',cursive;font-size:17px;
+  text-decoration:none;display:flex;align-items:center;justify-content:center;gap:8px;
+}
+
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:translateY(0)}}
+
+/* DIVIDER */
+.divider{height:4px;background:linear-gradient(90deg,var(--or),var(--yl),var(--gr),var(--bl),var(--pu));margin:0;}
+</style>
+</head>
+<body>
+
+<!-- STICKY CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#daftar">👉 Saya Nak Anak Pandai Bina Ayat! (RM0)</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <span class="floaty f1">📚</span>
+  <span class="floaty f2">✏️</span>
+  <span class="floaty f3">⭐</span>
+  <span class="floaty f4">🏆</span>
+
+  <div class="hero-badge">🆕 Modul Bahasa Melayu Tahun 1 & 2</div>
+  <h1>"Anak Selalu<br><span>Menangis</span> Bila<br>Kena Bina Ayat?" 😢</h1>
+  <p class="hero-sub">Pecahkan kebuntuan anak anda dengan<br><strong>Teknik SiBuDiAM</strong> — Formula rahsia kuasai<br>bina ayat lengkap dalam <strong>5 minit sehari</strong><br>selama <strong>7 hari sahaja!</strong> 🚀<br><em style="font-size:13px;opacity:.85;">Tanpa stres, tanpa paksaan.</em></p>
+
+  <div class="hero-pills">
+    <span class="pill">✅ 100% Percuma</span>
+    <span class="pill">⏱️ 5 Minit/Hari</span>
+    <span class="pill">👨‍👩‍👧 Buat Di Rumah</span>
+    <span class="pill">📱 Tanpa App</span>
+  </div>
+
+  <a href="#daftar" class="hero-cta">👉 Saya Nak Anak Pandai Bina Ayat!</a>
+  <p class="hero-note">🚀 Mulakan Modul 7 Hari Sekarang (RM0) · Tiada kad kredit diperlukan</p>
+</section>
+
+<div class="divider"></div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="s-num">7</div><div class="s-lbl">Hari Modul</div></div>
+  <div class="stat"><div class="s-num">5⭐</div><div class="s-lbl">Teknik Proven</div></div>
+  <div class="stat"><div class="s-num">Thn 1-2</div><div class="s-lbl">Sasaran</div></div>
+  <div class="stat"><div class="s-num">0 RM</div><div class="s-lbl">Kos Percuma</div></div>
+</div>
+
+<!-- WHAT IS SIBUDIAM -->
+<section class="section" style="background:white;">
+  <h2 class="section-title">Apa Itu <span style="color:var(--or)">SiBuDiAM</span>?</h2>
+  <p class="section-sub">Formula rahsia bina ayat Bahasa Melayu yang lengkap! ✨</p>
+
+  <div class="sib-showcase">
+    <div class="sib-title">🔑 Formula SiBuDiAM</div>
+    <div class="sib-row">
+      <div class="sib-letter sl-si">Si</div>
+      <div class="sib-info"><div class="si-word">Siapa?</div><div class="si-desc">Nama orang atau haiwan dalam ayat</div></div>
+    </div>
+    <div class="sib-row">
+      <div class="sib-letter sl-bu">Bu</div>
+      <div class="sib-info"><div class="si-word">Buat Apa?</div><div class="si-desc">Kata kerja — apa yang dilakukan</div></div>
+    </div>
+    <div class="sib-row">
+      <div class="sib-letter sl-di">Di</div>
+      <div class="sib-info"><div class="si-word">Di Mana?</div><div class="si-desc">Tempat atau lokasi kejadian</div></div>
+    </div>
+    <div class="sib-row">
+      <div class="sib-letter sl-a">A</div>
+      <div class="sib-info"><div class="si-word">Alat / Cara</div><div class="si-desc">Guna apa? Macam mana?</div></div>
+    </div>
+    <div class="sib-row" style="margin-bottom:0">
+      <div class="sib-letter sl-m">M</div>
+      <div class="sib-info"><div class="si-word">Masa · Mengapa · Macam Mana · Matematik</div><div class="si-desc">Bila? Sebab apa? Bagaimana? Berapa?</div></div>
+    </div>
+  </div>
+
+  <div style="max-width:480px;margin:0 auto;">
+    <div style="background:#FEF2F2;border-radius:14px;padding:14px;margin-bottom:10px;border-left:4px solid #EF4444;">
+      <div style="font-size:11px;font-weight:900;color:#EF4444;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">❌ Ayat Biasa (Membosankan)</div>
+      <div style="font-size:15px;font-weight:700;color:#555;">Ibu memasak nasi.</div>
+    </div>
+    <div style="text-align:center;font-size:20px;margin:6px 0;">⬇️</div>
+    <div style="background:linear-gradient(135deg,#E8FBF5,#EEF4FF);border-radius:14px;padding:14px;border-left:4px solid var(--gr);">
+      <div style="font-size:11px;font-weight:900;color:var(--gr);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">✅ Ayat SiBuDiAM — Gred A! ✨</div>
+      <div style="font-size:15px;font-weight:800;color:var(--text);line-height:1.8;">
+        <span style="background:var(--yl);border-radius:4px;padding:1px 6px;">Ibu</span> <em style="font-size:10px;color:var(--or)">(Si)</em>
+        memasak nasi
+        <span style="background:#E8FBF5;border-radius:4px;padding:1px 6px;">di dapur</span> <em style="font-size:10px;color:var(--gr)">(Di)</em>
+        menggunakan <span style="background:#EEF4FF;border-radius:4px;padding:1px 6px;">periuk</span> <em style="font-size:10px;color:var(--bl)">(A)</em>
+        <span style="background:#F3EEFF;border-radius:4px;padding:1px 6px;">setiap pagi</span>. <em style="font-size:10px;color:var(--pu)">(M)</em>
+      </div>
+      <div style="font-size:12px;font-weight:700;color:var(--gr);margin-top:8px;font-style:italic;">
+        Bayangkan anak Tahun 1 & 2 anda mampu menulis ayat sepanjang dan secantik ini dengan bimbingan Cikgu Zainal! 🌟
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="section" style="background:#FFF9F0;">
+  <h2 class="section-title">Apa Ada Dalam Modul?</h2>
+  <p class="section-sub">Lengkap, seronok, dan senang ibu bapa pantau 📊</p>
+
+  <div class="feat-grid">
+    <div class="feat f-highlight">
+      <div class="f-icon">📖</div>
+      <div class="f-title">Nota Harian</div>
+      <div class="f-desc">Nota ringkas & contoh ayat setiap hari</div>
+    </div>
+    <div class="feat">
+      <div class="f-icon">✏️</div>
+      <div class="f-title">Latihan 5 Min</div>
+      <div class="f-desc">Soalan interaktif, semak jawapan terus!</div>
+    </div>
+    <div class="feat">
+      <div class="f-icon">🏆</div>
+      <div class="f-title">Piramid Markah</div>
+      <div class="f-desc">Unlock level baru bila markah tinggi</div>
+    </div>
+    <div class="feat f-highlight">
+      <div class="f-icon">📊</div>
+      <div class="f-title">Report Ibu Bapa</div>
+      <div class="f-desc">Laporan terus ke WhatsApp ibu bapa</div>
+    </div>
+    <div class="feat">
+      <div class="f-icon">🎓</div>
+      <div class="f-title">Sijil Digital</div>
+      <div class="f-desc">Sijil pencapaian pada hari ke-7!</div>
+    </div>
+    <div class="feat">
+      <div class="f-icon">🔊</div>
+      <div class="f-title">Audio Kosa Kata</div>
+      <div class="f-desc">Tekan kad untuk dengar sebutan</div>
+    </div>
+  </div>
+</section>
+
+<!-- 7-DAY TIMELINE -->
+<section class="section" style="background:white;">
+  <h2 class="section-title">Jadual 7 Hari</h2>
+  <p class="section-sub">Setiap hari ada fokus yang berbeza 📅</p>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-dot">1</div>
+      <div class="tl-content">
+        <div class="tl-day">Hari 1 – Isnin</div>
+        <div class="tl-title">📖 Kenali SiBuDiAM</div>
+        <div class="tl-desc">Belajar unsur Si + Bu. Nota + 3 soalan mudah.</div>
+        <span class="tl-badge">⭐ Permulaan</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">2</div>
+      <div class="tl-content">
+        <div class="tl-day">Hari 2 – Selasa</div>
+        <div class="tl-title">✏️ Latihan Si + Bu</div>
+        <div class="tl-desc">5 soalan bina ayat 2 unsur. Semak terus!</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">3</div>
+      <div class="tl-content">
+        <div class="tl-day">Hari 3 – Rabu</div>
+        <div class="tl-title">🗺️ Tambah "Di Mana"</div>
+        <div class="tl-desc">Belajar lokasi. Ayat makin cantik!</div>
+        <span class="tl-badge">🔓 Level Baru</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">4</div>
+      <div class="tl-content">
+        <div class="tl-day">Hari 4 – Khamis</div>
+        <div class="tl-title">🔧 Tambah Alat (A)</div>
+        <div class="tl-desc">Ayat 4 unsur. Makin lengkap & ohsem!</div>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">5</div>
+      <div class="tl-content">
+        <div class="tl-day">Hari 5 – Jumaat</div>
+        <div class="tl-title">🎯 Kuiz Pertengahan</div>
+        <div class="tl-desc">Uji kemajuan. Skor terus keluar!</div>
+        <span class="tl-badge">📊 Laporan 1</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot">6</div>
+      <div class="tl-content">
+        <div class="tl-day">Hari 6 – Sabtu</div>
+        <div class="tl-title">🏆 Kuiz Akhir Minggu</div>
+        <div class="tl-desc">10 soalan. Laporan lengkap ke ibu bapa!</div>
+        <span class="tl-badge">📋 Report Card</span>
+      </div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot" style="background:linear-gradient(135deg,var(--yl),var(--or))">7</div>
+      <div class="tl-content" style="border:2px solid var(--yl);">
+        <div class="tl-day" style="color:var(--yl)">Hari 7 – Ahad 🎉</div>
+        <div class="tl-title">🎓 HARI SIJIL!</div>
+        <div class="tl-desc">Dapat sijil digital! Kongsikan ke WhatsApp!</div>
+        <span class="tl-badge" style="background:var(--or);color:white;">🏅 Sijil Pencapaian</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS (placeholder – Cikgu boleh tukar) -->
+<section class="section" style="background:#FFF9F0;">
+  <h2 class="section-title">Kata Ibu Bapa 💬</h2>
+  <p class="section-sub">Mereka dah cuba, anak mereka dah ohsem! 🌟</p>
+
+  <div class="testi-grid">
+    <div class="testi">
+      <p class="testi-text">"Anak saya suka sangat! 5 minit je sehari tapi dia dah boleh bina ayat sendiri. Terima kasih Cikgu Zainal!"</p>
+      <div class="testi-name">Puan Nor, ibu kepada Adam (Tahun 1)</div>
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+    </div>
+    <div class="testi">
+      <p class="testi-text">"Format laporan WhatsApp sangat membantu. Saya tahu kemajuan anak tanpa perlu tanya cikgu!"</p>
+      <div class="testi-name">Encik Farid, bapa Hana (Tahun 2)</div>
+      <div class="testi-stars">⭐⭐⭐⭐⭐</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" style="background:white;">
+  <h2 class="section-title">Pakej 📦</h2>
+  <p class="section-sub">Mulakan percuma, naik taraf bila sedia!</p>
+
+  <!-- PRICING GRID 3 COLUMN -->
+  <div style="display:grid;grid-template-columns:1fr;gap:14px;max-width:480px;margin:0 auto;">
+
+    <!-- FREEMIUM -->
+    <div class="price-card" style="border:2px solid #E8E0D0;">
+      <div style="font-size:11px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Percuma Selamanya</div>
+      <div class="price-tag">RM0</div>
+      <div class="price-name">🎁 Freemium</div>
+      <div style="font-size:11px;font-weight:700;color:var(--muted);margin-bottom:10px;">Cuba selama 4 minggu!</div>
+      <ul class="price-list">
+        <li>Modul HTML interaktif 4 minggu</li>
+        <li>Kuiz harian 5 minit</li>
+        <li>Laporan terus ke WhatsApp</li>
+        <li>Sijil digital Bulan 1</li>
+        <li class="no">Akses 53 minggu penuh</li>
+        <li class="no">Kuiz Wayground premium</li>
+        <li class="no">Laporan email ibu bapa</li>
+        <li class="no">Sijil & Badge Canva</li>
+      </ul>
+      <a href="#daftar" style="display:block;padding:12px;background:#F0F0F0;color:#555;font-family:'Fredoka One',cursive;font-size:16px;border-radius:14px;text-decoration:none;text-align:center;margin-top:12px;">Cuba Percuma 🎁</a>
+    </div>
+
+    <!-- ASAS -->
+    <div class="price-card" style="border:2px solid var(--bl);background:linear-gradient(135deg,#EEF4FF,#E8FBF5);">
+      <div style="font-size:11px;font-weight:900;color:var(--bl);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">Paling Popular 🔥</div>
+      <div style="font-size:13px;font-weight:700;color:var(--muted);text-decoration:line-through;">RM14.90/bulan</div>
+      <div class="price-tag" style="color:var(--bl);">RM9.90</div>
+      <div class="price-name" style="color:var(--bl);">📚 Pakej Asas</div>
+      <div style="font-size:11px;font-weight:800;color:var(--bl);background:rgba(17,138,178,.1);border-radius:8px;padding:4px 8px;margin-bottom:10px;display:inline-block;">/ bulan · Harga Pendahuluan!</div>
+      <ul class="price-list">
+        <li>Semua Freemium</li>
+        <li>Akses penuh 53 minggu HTML</li>
+        <li>Kuiz interaktif semua tema</li>
+        <li>Laporan WhatsApp mingguan</li>
+        <li>Sijil digital setiap bulan</li>
+        <li>Kod unlock mingguan eksklusif</li>
+        <li class="no">Kuiz Wayground premium</li>
+        <li class="no">Laporan email ibu bapa</li>
+        <li class="no">Sijil & Badge Canva</li>
+      </ul>
+      <a href="https://wa.me/60132372636?text=Saya%20berminat%20Pakej%20Asas%20Ohsem%20BM%20RM9.90%2Fbulan%20%F0%9F%93%9A" target="_blank" style="display:block;padding:12px;background:linear-gradient(135deg,var(--bl),var(--gr));color:white;font-family:'Fredoka One',cursive;font-size:16px;border-radius:14px;text-decoration:none;text-align:center;margin-top:12px;box-shadow:0 4px 14px rgba(17,138,178,.3);">Langgan Sekarang 📚</a>
+    </div>
+
+    <!-- PREMIUM -->
+    <div class="price-card featured" style="border:2px solid var(--or);background:linear-gradient(135deg,#FFF0EB,#FFF8E1);position:relative;">
+      <div style="position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:var(--or);color:white;font-size:11px;font-weight:900;padding:3px 14px;border-radius:20px;white-space:nowrap;">⭐ Nilai Terbaik</div>
+      <div style="font-size:11px;font-weight:900;color:var(--or);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;margin-top:8px;">Lengkap & Profesional</div>
+      <div style="font-size:13px;font-weight:700;color:var(--muted);text-decoration:line-through;">RM29.90/bulan</div>
+      <div class="price-tag">RM19.90</div>
+      <div class="price-name">🌟 Pakej Premium</div>
+      <div style="font-size:11px;font-weight:800;color:var(--or);background:rgba(255,107,53,.1);border-radius:8px;padding:4px 8px;margin-bottom:10px;display:inline-block;">/ bulan · Harga Pendahuluan!</div>
+      <ul class="price-list">
+        <li>Semua Pakej Asas</li>
+        <li>Kuiz Wayground (pelbagai jenis soalan)</li>
+        <li>Worksheet cetak (PDF — ibu bapa cetak sendiri)</li>
+        <li>Laporan terus ke email ibu bapa</li>
+        <li>Sijil & Badge eksklusif Canva</li>
+        <li>Ibu bapa letak nama sendiri di Canva</li>
+        <li>Exam online Wayground bulanan</li>
+        <li>Keutamaan sokongan Cikgu Zainal</li>
+      </ul>
+      <a href="https://wa.me/60132372636?text=Saya%20berminat%20Pakej%20Premium%20Ohsem%20BM%20RM19.90%2Fbulan%20%F0%9F%8C%9F" target="_blank" style="display:block;padding:12px;background:linear-gradient(135deg,var(--or),#FF8C42);color:white;font-family:'Fredoka One',cursive;font-size:16px;border-radius:14px;text-decoration:none;text-align:center;margin-top:12px;box-shadow:0 4px 14px rgba(255,107,53,.35);">Langgan Premium 🌟</a>
+    </div>
+
+    <!-- AFFILIATE NOTE -->
+    <div style="background:linear-gradient(135deg,#F3EEFF,#EEF4FF);border-radius:16px;padding:16px;text-align:center;margin-top:4px;">
+      <div style="font-size:16px;margin-bottom:6px;">💰</div>
+      <div style="font-family:'Fredoka One',cursive;font-size:16px;color:var(--pu);margin-bottom:4px;">Jana Pendapatan Bersama Kami!</div>
+      <div style="font-size:12px;font-weight:700;color:var(--muted);line-height:1.6;">Kongsikan modul ini kepada rakan ibu bapa.<br>Dapat <strong style="color:var(--pu);">komisen RM2–RM4</strong> setiap rujukan berjaya!</div>
+      <a href="https://wa.me/60132372636?text=Saya%20berminat%20jadi%20affiliate%20Ohsem%20BM%20%F0%9F%92%B0" target="_blank" style="display:inline-block;margin-top:10px;padding:8px 20px;background:linear-gradient(135deg,var(--pu),var(--bl));color:white;font-family:'Fredoka One',cursive;font-size:14px;border-radius:12px;text-decoration:none;">Daftar Affiliate 💰</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- LEAD FORM -->
+<section class="form-section" id="daftar">
+  <div class="form-card">
+    <div id="formWrap">
+      <div style="text-align:center;margin-bottom:16px;">
+        <span style="font-size:40px">🎁</span>
+      </div>
+      <div class="form-title">Daftar & Akses PERCUMA!</div>
+      <div class="form-sub">Isi borang ringkas di bawah. Akses terus selepas hantar!</div>
+
+      <div class="inp-group">
+        <label class="inp-label">Nama Anak 👦👧</label>
+        <input class="inp" id="childName" type="text" placeholder="Contoh: Ahmad Faris" />
+      </div>
+      <div class="inp-group">
+        <label class="inp-label">Darjah / Tahun 📚</label>
+        <select class="inp" id="grade">
+          <option value="">Pilih tahun...</option>
+          <option value="Tahun 1">Tahun 1</option>
+          <option value="Tahun 2">Tahun 2</option>
+          <option value="Tahun 3">Tahun 3</option>
+        </select>
+      </div>
+      <div class="inp-group">
+        <label class="inp-label">Nama Ibu / Bapa 👨‍👩‍👧</label>
+        <input class="inp" id="parentName" type="text" placeholder="Contoh: Puan Aishah" />
+      </div>
+      <div class="inp-group">
+        <label class="inp-label">No WhatsApp 📱</label>
+        <input class="inp" id="phoneNum" type="tel" placeholder="Contoh: 0123456789" />
+      </div>
+      <div class="inp-group">
+        <label class="inp-label">Email (untuk laporan lengkap) 📧</label>
+        <input class="inp" id="emailAddr" type="email" placeholder="Contoh: ibu@gmail.com (boleh kosong)" />
+      </div>
+
+      <button class="form-submit" onclick="submitForm()">
+        Akses Modul PERCUMA Sekarang! 🚀
+      </button>
+      <p class="form-note">🔒 Maklumat anda selamat. Tidak akan dikongsi kepada pihak lain.</p>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-panel" id="successPanel">
+      <span class="success-emoji">🎉</span>
+      <div class="success-title">Tahniah! Akses Berjaya!</div>
+      <p class="success-msg">
+        Selamat datang ke <strong>Ohsem BM!</strong><br>
+        Tekan butang di bawah untuk mula belajar sekarang. 💪
+      </p>
+      <a href="ohsem_sibudiam_7hari.html" class="access-btn">
+        📚 Mula Modul 7 Hari Sekarang!
+      </a>
+      <a href="#" class="wa-btn" id="waConfirmBtn">
+        📲 Terima Pengesahan di WhatsApp
+      </a>
+      <p style="font-size:11px;font-weight:700;color:var(--muted);margin-top:12px;text-align:center;">
+        💡 Simpan link ini untuk akses bila-bila masa!
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <h3>✨ Ohsem BM</h3>
+  <p>
+    Modul Bahasa Melayu Tahun 1 & 2<br>
+    Teknik SiBuDiAM oleh <strong style="color:white">Cikgu Zainal</strong><br>
+    Belajar Sambil Seronok! 🌟
+  </p>
+  <div class="footer-links">
+    <a href="#">YouTube Cikgu Zainal</a>
+    <a href="#">Hubungi Kami</a>
+    <a href="#">Dasar Privasi</a>
+  </div>
+  <p style="margin-top:14px;font-size:10px;">© 2025 Ohsem BM. Hak cipta terpelihara.</p>
+</footer>
+
+<!-- BOTTOM PADDING for sticky CTA -->
+<div style="height:60px;"></div>
+
+<script>
+// Sticky CTA show after scroll
+window.addEventListener('scroll', () => {
+  const cta = document.getElementById('stickyCta');
+  if(window.scrollY > 300) cta.classList.add('show');
+  else cta.classList.remove('show');
+});
+
+// Form submit
+function submitForm() {
+  const child = document.getElementById('childName').value.trim();
+  const grade = document.getElementById('grade').value;
+  const parent = document.getElementById('parentName').value.trim();
+  const phone = document.getElementById('phoneNum').value.trim();
+  const email = document.getElementById('emailAddr').value.trim();
+
+  if(!child){ alert('Sila masukkan nama anak. 😊'); return; }
+  if(!grade){ alert('Sila pilih tahun/darjah. 😊'); return; }
+  if(!parent){ alert('Sila masukkan nama ibu/bapa. 😊'); return; }
+  if(!phone){ alert('Sila masukkan no WhatsApp. 😊'); return; }
+
+  // ── GOOGLE SHEETS via Apps Script ──
+  // GANTI URL DI BAWAH dengan URL Google Apps Script Cikgu
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxUCkJrg3PPBXpATBw4q8lLZsKYJNDaOKiu6x8xpyKcuwVszsBg3mm9CTdcQuRmS8TM/exec';
+
+  const data = {
+    namaAnak: child,
+    tahun: grade,
+    namaWali: parent,
+    telefon: phone,
+    email: email,
+    tarikhDaftar: new Date().toLocaleString('ms-MY'),
+  };
+
+  // Send to Google Sheets (no-cors mode)
+  fetch(SCRIPT_URL, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  }).catch(() => {}); // Silent fail ok — data still shows success
+
+  // Show success
+  document.getElementById('formWrap').style.display = 'none';
+  document.getElementById('successPanel').classList.add('show');
+
+  // WhatsApp confirmation button
+  const waMsg = encodeURIComponent(
+    '🎉 Terima kasih mendaftar *Ohsem BM*!\n\n'+
+    '👦 Nama anak: '+child+'\n'+
+    '📚 Tahun: '+grade+'\n\n'+
+    '✅ Akses modul percuma 7 hari sudah aktif!\n\n'+
+    'Selamat belajar! 💪\n'+
+    '— Cikgu Zainal, Ohsem BM'
+  );
+  // GANTI nombor telefon Cikgu di bawah
+  document.getElementById('waConfirmBtn').href =
+    'https://wa.me/60132372636?text=' + waMsg;
+
+  // Scroll to success
+  document.getElementById('successPanel').scrollIntoView({ behavior: 'smooth' });
+
+  // Launch confetti
+  launchConf();
+}
+
+function launchConf() {
+  const cols = ['#FF6B35','#FFD23F','#06D6A0','#7B5EA7','#118AB2','#FF6B9D'];
+  const wrap = document.createElement('div');
+  wrap.style.cssText='position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:9999;';
+  document.body.appendChild(wrap);
+  for(let i=0;i<60;i++){
+    const el=document.createElement('div');
+    el.style.cssText=`position:absolute;width:${6+Math.random()*10}px;height:${6+Math.random()*10}px;
+      background:${cols[Math.floor(Math.random()*cols.length)]};border-radius:2px;
+      left:${Math.random()*100}vw;top:-10px;
+      animation:confFall ${2+Math.random()*2}s ease-in ${Math.random()*2}s forwards;`;
+    wrap.appendChild(el);
+  }
+  const style=document.createElement('style');
+  style.textContent='@keyframes confFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}';
+  document.head.appendChild(style);
+  setTimeout(()=>wrap.remove(),6000);
+}
+</script>
+<script>
+document.addEventListener("contextmenu",function(e){e.preventDefault();return false;});
+document.addEventListener("keydown",function(e){if(e.key==="F12"){e.preventDefault();return false;}if(e.ctrlKey&&e.key==="u"){e.preventDefault();return false;}if(e.ctrlKey&&e.shiftKey&&e.key==="I"){e.preventDefault();return false;}if(e.ctrlKey&&e.key==="s"){e.preventDefault();return false;}});
+document.addEventListener("dragstart",function(e){e.preventDefault();return false;});
+</script>
+</body>
+</html>
