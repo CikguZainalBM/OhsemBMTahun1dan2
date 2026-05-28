@@ -1,0 +1,1125 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ohsem BM – Minggu 4: Exam Bulan 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+/* PERLINDUNGAN */
+body{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
+input,textarea{-webkit-user-select:text!important;user-select:text!important;}
+:root{
+  --or:#FF6B35;--yl:#FFD23F;--gr:#06D6A0;
+  --pu:#7B5EA7;--bl:#118AB2;--pk:#FF6B9D;
+  --gold:#F59E0B;--gold2:#D97706;
+  --bg:#FFF9F0;--text:#2D2D2D;--muted:#999;
+  --rad:18px;--shad:0 6px 24px rgba(0,0,0,.09);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;}
+
+/* HEADER */
+.hdr{background:linear-gradient(135deg,#1A1A2E 0%,#2D1B69 50%,#7B5EA7 100%);padding:22px 16px 16px;text-align:center;position:relative;overflow:hidden;}
+.hdr::before{content:'';position:absolute;top:-50px;right:-30px;width:160px;height:160px;background:rgba(245,158,11,.15);border-radius:50%;}
+.hdr::after{content:'';position:absolute;bottom:-30px;left:-20px;width:100px;height:100px;background:rgba(255,210,63,.1);border-radius:50%;}
+.hdr .badge{display:inline-block;background:rgba(245,158,11,.3);color:var(--yl);font-size:10px;font-weight:900;letter-spacing:2px;text-transform:uppercase;padding:3px 12px;border-radius:20px;margin-bottom:6px;border:1px solid rgba(245,158,11,.4);}
+.hdr h1{font-family:'Fredoka One',cursive;font-size:28px;color:white;text-shadow:0 3px 10px rgba(0,0,0,.3);line-height:1.1;}
+.hdr h1 span{color:var(--yl);}
+.hdr p{color:rgba(255,255,255,.85);font-size:13px;font-weight:700;margin-top:4px;}
+
+/* TROPHY ROW */
+.trophy-row{display:flex;justify-content:center;gap:12px;margin-top:12px;}
+.trophy-item{background:rgba(255,255,255,.1);border:1px solid rgba(255,210,63,.3);border-radius:12px;padding:8px 14px;text-align:center;}
+.trophy-item .ti-icon{font-size:20px;}
+.trophy-item .ti-label{font-size:10px;font-weight:800;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+
+/* DAY PICKER */
+.daypick{background:white;padding:12px 16px;border-bottom:2px solid #F0E8D8;}
+.daypick-label{font-size:11px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.days-row{display:flex;gap:6px;overflow-x:auto;padding-bottom:4px;}
+.day-btn{flex-shrink:0;width:44px;height:54px;border-radius:14px;border:2px solid #E8E0D0;background:white;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;transition:all .15s;font-family:'Nunito',sans-serif;}
+.day-btn .d-num{font-size:16px;font-weight:900;color:var(--muted);}
+.day-btn .d-lbl{font-size:9px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;}
+.day-btn.active{background:var(--pu);border-color:var(--pu);}
+.day-btn.active .d-num,.day-btn.active .d-lbl{color:white;}
+.day-btn.done{background:#E8FBF5;border-color:var(--gr);}
+.day-btn.done .d-num{color:var(--gr);}
+.day-btn.exam-day{border-color:var(--gold);background:linear-gradient(135deg,#FEF3C7,#FFF8E1);}
+.day-btn.exam-day .d-num{color:var(--gold2);}
+
+/* PROGRESS */
+.prog-wrap{padding:10px 16px;background:white;border-bottom:2px solid #F0E8D8;}
+.prog-label{display:flex;justify-content:space-between;margin-bottom:6px;}
+.prog-label span{font-size:11px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:1px;}
+.prog-label strong{font-size:12px;font-weight:900;color:var(--pu);}
+.prog-track{background:#F0E8D8;border-radius:10px;height:10px;overflow:hidden;}
+.prog-fill{height:100%;background:linear-gradient(90deg,var(--pu),var(--gold));border-radius:10px;transition:width .6s;}
+
+/* CONTENT */
+.content{padding:16px;}
+.card{background:white;border-radius:var(--rad);padding:18px;margin-bottom:14px;box-shadow:var(--shad);}
+.card-title{font-family:'Fredoka One',cursive;font-size:17px;color:var(--pu);margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+
+/* REVIEW CARDS */
+.review-grid{display:grid;grid-template-columns:1fr;gap:10px;margin:10px 0;}
+.review-card{border-radius:14px;padding:14px;border-left:5px solid;}
+.rc-1{background:#FFF0EB;border-color:var(--or);}
+.rc-2{background:#EEF4FF;border-color:var(--bl);}
+.rc-3{background:#E8FBF5;border-color:var(--gr);}
+.rc-title{font-family:'Fredoka One',cursive;font-size:15px;margin-bottom:6px;}
+.rc-1 .rc-title{color:var(--or);}
+.rc-2 .rc-title{color:var(--bl);}
+.rc-3 .rc-title{color:var(--gr);}
+.rc-eg{font-size:13px;font-weight:700;color:var(--text);line-height:1.6;}
+.hl{background:var(--yl);border-radius:4px;padding:0 4px;color:#333;}
+.hl-di{background:#E8FBF5;border-radius:4px;padding:0 4px;color:#065F46;}
+.hl-a{background:#EEF4FF;border-radius:4px;padding:0 4px;color:#1E40AF;}
+
+/* SIB CHIPS */
+.sib-mini{display:flex;gap:6px;margin-bottom:14px;flex-wrap:wrap;}
+.sib-chip{border-radius:10px;padding:6px 10px;font-size:12px;font-weight:800;}
+.sc-si{background:#FFF0EB;color:#FF6B35;}
+.sc-bu{background:#FFF8E1;color:#F59E0B;}
+.sc-di{background:#E8FBF5;color:#059669;}
+.sc-a{background:#EEF4FF;color:#2563EB;}
+.sc-m{background:#F3EEFF;color:#7B5EA7;}
+
+/* Q WRAP */
+.q-wrap{margin-bottom:16px;}
+.q-num{display:inline-flex;align-items:center;justify-content:center;width:26px;height:26px;border-radius:50%;font-size:12px;font-weight:900;color:white;background:var(--pu);margin-right:8px;flex-shrink:0;}
+.q-text{font-size:14px;font-weight:700;line-height:1.6;margin-bottom:8px;}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.opt{padding:9px 8px;border:2px solid #E8E0D0;border-radius:12px;background:white;font-family:'Nunito',sans-serif;font-size:13px;font-weight:700;cursor:pointer;transition:all .12s;text-align:center;line-height:1.4;}
+.opt:hover{border-color:var(--pu);background:#F3EEFF;}
+.opt.cor{border-color:var(--gr);background:#E8FBF5;color:#065F46;}
+.opt.wrg{border-color:#EF4444;background:#FEF2F2;color:#991B1B;}
+.fb{font-size:12px;font-weight:700;padding:6px 10px;border-radius:8px;margin-top:6px;display:none;}
+.fb.cor{background:#D1FAE5;color:#065F46;display:block;}
+.fb.wrg{background:#FEE2E2;color:#991B1B;display:block;}
+.wi{width:100%;border:2px solid #E8E0D0;border-radius:12px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:14px;font-weight:600;outline:none;transition:border-color .2s;margin-top:6px;}
+.wi:focus{border-color:var(--pu);}
+.wi.cor{border-color:var(--gr);background:#E8FBF5;}
+.wi.wrg{border-color:#EF4444;background:#FEF2F2;}
+.tip{background:#F3EEFF;border-left:4px solid var(--pu);border-radius:0 12px 12px 0;padding:12px;margin:10px 0;font-size:13px;font-weight:600;color:#4A3870;line-height:1.6;}
+.tip strong{color:var(--pu);}
+
+/* TIMER */
+.timer-wrap{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.timer-box{background:linear-gradient(135deg,var(--pu),var(--gold));color:white;border-radius:12px;padding:8px 16px;font-family:'Fredoka One',cursive;font-size:22px;min-width:70px;text-align:center;}
+.timer-label{font-size:12px;font-weight:800;color:var(--muted);}
+.timer-start{padding:8px 16px;background:var(--pu);color:white;border:none;border-radius:12px;font-family:'Fredoka One',cursive;font-size:15px;cursor:pointer;}
+
+/* SCORE PANEL */
+.score-panel{border-radius:var(--rad);padding:22px;text-align:center;margin-bottom:14px;display:none;animation:popIn .4s cubic-bezier(.34,1.56,.64,1);}
+.score-panel.show{display:block;}
+@keyframes popIn{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
+.sp-emoji{font-size:50px;display:block;margin-bottom:6px;}
+.sp-num{font-family:'Fredoka One',cursive;font-size:44px;line-height:1;}
+.sp-label{font-size:13px;font-weight:700;opacity:.85;margin-top:4px;}
+.stars-earned{display:flex;justify-content:center;gap:8px;margin:12px 0;}
+.star-item{font-size:28px;filter:grayscale(1) opacity(.3);transition:filter .4s;}
+.star-item.lit{filter:none;animation:starPop .5s cubic-bezier(.34,1.56,.64,1);}
+@keyframes starPop{from{transform:scale(0)}to{transform:scale(1)}}
+.sp-msg{font-size:16px;font-weight:800;margin-top:10px;padding:10px;border-radius:12px;background:rgba(255,255,255,.25);}
+.sp-bar{height:12px;border-radius:10px;overflow:hidden;background:rgba(255,255,255,.25);margin-top:14px;}
+.sp-fill{height:100%;background:var(--yl);border-radius:10px;transition:width 1s;}
+
+/* BUTTONS */
+.btn-main{width:100%;padding:15px;border:none;border-radius:var(--rad);font-family:'Fredoka One',cursive;font-size:19px;color:white;cursor:pointer;transition:transform .12s;margin-top:6px;}
+.btn-pu{background:linear-gradient(135deg,var(--pu),var(--bl));box-shadow:0 6px 20px rgba(123,94,167,.3);}
+.btn-gold{background:linear-gradient(135deg,var(--gold),var(--gold2));box-shadow:0 6px 20px rgba(245,158,11,.35);}
+.btn-gr{background:linear-gradient(135deg,var(--gr),#059669);box-shadow:0 6px 20px rgba(6,214,160,.3);}
+.btn-or{background:linear-gradient(135deg,var(--or),#FF8C42);box-shadow:0 6px 20px rgba(255,107,53,.3);}
+.btn-wa{background:linear-gradient(135deg,#25D366,#128C7E);box-shadow:0 6px 20px rgba(37,211,102,.25);}
+.btn-main:hover{transform:translateY(-2px);}
+
+/* QUOTE */
+.quote-box{background:linear-gradient(135deg,#F3EEFF,#FFF8E1);border-radius:14px;padding:14px;text-align:center;margin:10px 0;}
+.quote-text{font-size:13px;font-weight:700;color:var(--pu);font-style:italic;line-height:1.6;}
+.quote-auth{font-size:11px;font-weight:900;color:var(--muted);margin-top:6px;}
+
+/* EXAM SPECIAL */
+.exam-banner{background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:var(--rad);padding:20px;text-align:center;margin-bottom:14px;color:white;}
+.exam-banner h2{font-family:'Fredoka One',cursive;font-size:24px;}
+.exam-banner p{font-size:13px;font-weight:700;opacity:.9;margin-top:4px;}
+.exam-steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;}
+.exam-step{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.2);border-radius:12px;padding:12px;}
+.es-num{width:32px;height:32px;border-radius:50%;background:white;color:var(--gold2);font-family:'Fredoka One',cursive;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.es-text{font-size:13px;font-weight:700;}
+
+/* UPGRADE SECTION */
+.upgrade-section{background:linear-gradient(135deg,#1A1A2E,#2D1B69);border-radius:var(--rad);padding:22px;margin-bottom:14px;text-align:center;color:white;}
+.upgrade-badge{display:inline-block;background:var(--yl);color:#1A1A2E;font-family:'Fredoka One',cursive;font-size:14px;padding:4px 16px;border-radius:20px;margin-bottom:12px;}
+.upgrade-title{font-family:'Fredoka One',cursive;font-size:24px;color:var(--yl);margin-bottom:8px;}
+.upgrade-desc{font-size:13px;font-weight:700;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:16px;}
+.upgrade-features{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:16px;}
+.uf-item{background:rgba(255,255,255,.1);border-radius:12px;padding:10px;text-align:left;font-size:12px;font-weight:700;}
+.uf-item .uf-icon{font-size:20px;display:block;margin-bottom:4px;}
+.price-tag{font-family:'Fredoka One',cursive;font-size:36px;color:var(--yl);}
+.price-sub{font-size:12px;font-weight:700;color:rgba(255,255,255,.6);margin-top:2px;}
+.price-ori{font-size:14px;font-weight:700;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:8px;}
+
+/* WAYGROUND BOX */
+.wayground-box{background:linear-gradient(135deg,#EEF4FF,#F3EEFF);border-radius:14px;padding:16px;margin:14px 0;border:2px solid var(--pu);}
+.wb-title{font-family:'Fredoka One',cursive;font-size:16px;color:var(--pu);margin-bottom:8px;}
+.wb-list{list-style:none;font-size:13px;font-weight:700;color:var(--text);}
+.wb-list li{padding:4px 0;display:flex;align-items:center;gap:8px;}
+.wb-list li::before{content:'✅';font-size:11px;}
+
+/* CERT */
+.cert{background:white;border-radius:var(--rad);padding:28px 20px;text-align:center;position:relative;overflow:hidden;margin-bottom:14px;}
+.cert-border{position:absolute;top:0;left:0;right:0;bottom:0;border:6px solid transparent;border-radius:var(--rad);background:linear-gradient(white,white) padding-box,linear-gradient(135deg,var(--gold),var(--pu),var(--or),var(--gold)) border-box;}
+.cert::before{content:'';position:absolute;top:0;left:0;right:0;height:8px;background:linear-gradient(90deg,var(--gold),var(--pu),var(--or),var(--gr),var(--bl),var(--gold));}
+.cert-logo{font-size:56px;margin-bottom:8px;display:block;}
+.cert-title{font-family:'Fredoka One',cursive;font-size:26px;color:var(--gold2);}
+.cert-subtitle{font-size:12px;font-weight:800;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin:4px 0 16px;}
+.cert-month{font-family:'Fredoka One',cursive;font-size:18px;color:var(--pu);background:#F3EEFF;border-radius:10px;padding:6px 16px;display:inline-block;margin-bottom:12px;}
+.cert-name{font-family:'Fredoka One',cursive;font-size:28px;color:var(--text);border-bottom:3px solid var(--gold);display:inline-block;padding:0 20px 4px;margin:8px 0;}
+.cert-desc{font-size:13px;font-weight:700;color:#555;line-height:1.7;margin:12px 0 16px;}
+.cert-badges{display:flex;justify-content:center;gap:8px;margin:12px 0;flex-wrap:wrap;}
+.cert-badge{border-radius:12px;padding:7px 12px;font-size:11px;font-weight:800;}
+.cb1{background:#FEF3C7;color:#B45309;}
+.cb2{background:#F3EEFF;color:var(--pu);}
+.cb3{background:#E8FBF5;color:#065F46;}
+.cb4{background:#FFF0EB;color:var(--or);}
+.cert-stars{font-size:32px;margin:8px 0;letter-spacing:6px;}
+.cert-footer{display:flex;justify-content:space-between;align-items:flex-end;margin-top:20px;padding-top:16px;border-top:1px dashed #F0E8D8;}
+.cert-sign{text-align:center;}
+.cert-sign .cs-line{border-bottom:2px solid #C4A8E0;width:120px;margin:0 auto 4px;height:28px;}
+.cert-sign .cs-name{font-size:11px;font-weight:900;color:var(--muted);}
+.name-input{width:100%;border:2px solid var(--gold);border-radius:12px;padding:10px 14px;font-family:'Nunito',sans-serif;font-size:16px;font-weight:700;outline:none;text-align:center;}
+
+/* REPORT */
+.rpt-hdr{background:linear-gradient(135deg,var(--pu),var(--gold2));padding:20px;text-align:center;border-radius:var(--rad) var(--rad) 0 0;color:white;}
+.rpt-hdr h2{font-family:'Fredoka One',cursive;font-size:20px;}
+.rpt-body{background:white;border-radius:0 0 var(--rad) var(--rad);padding:18px;}
+.rpt-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed #F0E8D8;font-size:13px;}
+.rpt-row:last-child{border-bottom:none;}
+.rpt-key{font-weight:700;color:var(--muted);}
+.rpt-val{font-weight:900;}
+.grade-tag{display:inline-block;padding:3px 12px;border-radius:20px;font-weight:900;font-size:12px;}
+.gA{background:#D1FAE5;color:#065F46;}.gB{background:#DBEAFE;color:#1E40AF;}
+.gC{background:#FEF3C7;color:#92400E;}.gD{background:#FEE2E2;color:#991B1B;}
+.skill-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0;}
+.sk{border-radius:12px;padding:10px;}
+.sk-si{background:#FFF0EB;}.sk-bu{background:#FFF8E1;}.sk-di{background:#E8FBF5;}.sk-am{background:#EEF4FF;}
+.sk .si{font-size:18px;}.sk .sn{font-size:10px;font-weight:900;text-transform:uppercase;letter-spacing:.5px;margin:3px 0 5px;}
+.sk .sb{background:#F0F0F0;border-radius:8px;height:7px;overflow:hidden;}
+.sk .sf{height:100%;border-radius:8px;}
+.sf-si{background:var(--or);}.sf-bu{background:#F59E0B;}.sf-di{background:var(--gr);}.sf-am{background:#2563EB;}
+.note-box{background:#F3EEFF;border-left:4px solid var(--pu);border-radius:0 12px 12px 0;padding:12px;margin-top:12px;font-size:12px;font-weight:600;color:#4A3870;line-height:1.6;}
+.note-box strong{color:var(--pu);}
+
+/* CONF */
+.conf-wrap{position:fixed;top:0;left:0;right:0;bottom:0;pointer-events:none;z-index:1000;display:none;}
+.conf-p{position:absolute;border-radius:2px;animation:confFall 3s ease-in forwards;}
+@keyframes confFall{0%{transform:translateY(0) rotate(0deg);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+</style>
+</head>
+<body>
+<div class="conf-wrap" id="confWrap"></div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="badge">🏆 Ohsem BM – Tahun 1 & 2 · Minggu 4</div>
+  <h1>Exam <span>Bulan 1</span> 🎓</h1>
+  <p>Ulang Kaji + Exam Online + Sijil Bulan 1</p>
+  <div class="trophy-row">
+    <div class="trophy-item"><div class="ti-icon">📖</div><div class="ti-label">Ulang Kaji</div></div>
+    <div class="trophy-item"><div class="ti-icon">🎯</div><div class="ti-label">Exam</div></div>
+    <div class="trophy-item"><div class="ti-icon">🏅</div><div class="ti-label">Sijil Bulan 1</div></div>
+    <div class="trophy-item"><div class="ti-icon">⭐⭐⭐</div><div class="ti-label">3 Minggu</div></div>
+  </div>
+</div>
+
+<!-- DAY PICKER -->
+<div class="daypick">
+  <div class="daypick-label">Pilih Hari</div>
+  <div class="days-row" id="daysRow"></div>
+</div>
+
+<!-- PROGRESS -->
+<div class="prog-wrap">
+  <div class="prog-label">
+    <span>Kemajuan Minggu 4</span>
+    <strong id="weekPct">0%</strong>
+  </div>
+  <div class="prog-track"><div class="prog-fill" id="weekFill" style="width:0%"></div></div>
+</div>
+
+<div class="content" id="mainContent"></div>
+
+<script>
+let currentDay=1;
+let dayScores={1:null,2:null,3:null,4:null,5:null,6:null,7:null};
+let quizAnswers={};
+let quizDone=false;
+let timerInterval=null;
+let timerSec=300;
+let timerRunning=false;
+let studentName='';
+
+const dayConfig=[
+  {day:1,label:'Isnin',icon:'📖',title:'Ulang Kaji Minggu 1'},
+  {day:2,label:'Selasa',icon:'📖',title:'Ulang Kaji Minggu 2'},
+  {day:3,label:'Rabu',icon:'📖',title:'Ulang Kaji Minggu 3'},
+  {day:4,label:'Khamis',icon:'✏️',title:'Latihan Gabungan'},
+  {day:5,label:'Jumaat',icon:'🎯',title:'Exam Online'},
+  {day:6,label:'Sabtu',icon:'🏆',title:'Kuiz OHSEM Kamu!'},
+  {day:7,label:'Ahad',icon:'🏅',title:'Sijil Bulan 1'},
+];
+
+const quotes=[
+  {text:'"Ulang kaji adalah kunci kejayaan. Kamu boleh!"',auth:'— Cikgu Zainal'},
+  {text:'"Setiap kali kamu ulang kaji, ilmu itu makin sebati dalam hati."',auth:'— Mutiara Kata'},
+  {text:'"Tiga minggu dah berlalu. Kamu dah belajar banyak!"',auth:'— Cikgu Zainal'},
+  {text:'"Latihan menjadi sempurna. Teruskan usaha kamu!"',auth:'— Mutiara Kata'},
+  {text:'"Ini hari exam! Tunjukkan semua yang kamu dah belajar!"',auth:'— Cikgu Zainal'},
+  {text:'"Kuiz terakhir bulan ini. Kamu pasti boleh!"',auth:'— Cikgu Zainal'},
+  {text:'"Tahniah! Kamu telah selesai Bulan 1 Ohsem BM!"',auth:'— Cikgu Zainal'},
+];
+
+function renderDayPicker(){
+  document.getElementById('daysRow').innerHTML=dayConfig.map(d=>{
+    let cls='day-btn';
+    if(d.day===currentDay) cls+=' active';
+    else if(dayScores[d.day]!==null) cls+=' done';
+    else if(d.day===5) cls+=' exam-day';
+    return `<button class="${cls}" onclick="switchDay(${d.day})">
+      <span class="d-num">${dayScores[d.day]!==null?'✅':d.day===5?'🎯':d.day}</span>
+      <span class="d-lbl">${d.label}</span>
+    </button>`;
+  }).join('');
+}
+
+function renderWeekProgress(){
+  const done=Object.values(dayScores).filter(v=>v!==null).length;
+  const pct=Math.round((done/7)*100);
+  document.getElementById('weekPct').textContent=pct+'%';
+  document.getElementById('weekFill').style.width=pct+'%';
+}
+
+function switchDay(d){
+  currentDay=d;quizAnswers={};quizDone=false;stopTimer();
+  renderDayPicker();renderWeekProgress();renderContent();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function startTimer(){
+  if(timerRunning) return;
+  timerSec=300;timerRunning=true;
+  timerInterval=setInterval(()=>{timerSec--;updateTimerDisplay();if(timerSec<=0) stopTimer();},1000);
+  const btn=document.querySelector('.timer-start');
+  if(btn) btn.textContent='Sedang berjalan...';
+}
+function stopTimer(){clearInterval(timerInterval);timerRunning=false;}
+function updateTimerDisplay(){
+  const el=document.getElementById('timerDisplay');
+  if(!el) return;
+  const m=Math.floor(timerSec/60),s=timerSec%60;
+  el.textContent=m+':'+String(s).padStart(2,'0');
+  if(timerSec<=60) el.style.color='#EF4444';
+}
+
+function selectOpt(btn,qid,chosen,correct){
+  const parent=btn.closest('.q-wrap');
+  parent.querySelectorAll('.opt').forEach(b=>b.classList.remove('cor','wrg'));
+  const fb=document.getElementById('fb-'+qid);
+  if(chosen===correct){
+    btn.classList.add('cor');fb.textContent='✅ Betul! Hebat!';fb.className='fb cor';
+    quizAnswers[qid]=true;
+  } else {
+    btn.classList.add('wrg');fb.textContent='❌ Jawapan: '+correct;fb.className='fb wrg';
+    parent.querySelectorAll('.opt').forEach(b=>{
+      if(b.textContent.trim()===correct||b.textContent.includes(correct)) b.classList.add('cor');
+    });
+    quizAnswers[qid]=false;
+  }
+}
+
+function checkWrite(inp,accepted,qid){
+  const val=inp.value.toLowerCase().trim();
+  const fb=document.getElementById('fb-'+qid);
+  if(!val) return;
+  const ok=accepted.some(a=>val.includes(a.toLowerCase()));
+  if(ok){
+    inp.classList.add('cor');inp.classList.remove('wrg');
+    if(fb){fb.innerHTML='✅ Bagus! Jawapan diterima!';fb.className='fb cor';}
+    quizAnswers[qid]=true;
+    const rb=document.getElementById('retry-'+qid);if(rb) rb.remove();
+  } else if(val.length>2){
+    inp.classList.add('wrg');inp.classList.remove('cor');
+    if(fb){fb.innerHTML='💡 Cuba lagi! Contoh: <strong>'+accepted[0]+'</strong>';fb.className='fb wrg';}
+    quizAnswers[qid]=false;
+    if(!document.getElementById('retry-'+qid)){
+      const rb=document.createElement('button');rb.id='retry-'+qid;rb.textContent='🔄 Cuba Semula';
+      rb.style.cssText='margin-top:6px;padding:7px 14px;background:#F3EEFF;border:2px solid var(--pu);border-radius:10px;font-family:Nunito,sans-serif;font-size:12px;font-weight:800;color:var(--pu);cursor:pointer;width:100%;';
+      rb.onclick=()=>{inp.value='';inp.classList.remove('wrg','cor');if(fb){fb.className='fb';fb.textContent='';}rb.remove();inp.focus();};
+      fb.parentNode.insertBefore(rb,fb.nextSibling);
+    }
+  }
+}
+
+function submitDay(dayNum){
+  const trues=Object.values(quizAnswers).filter(Boolean).length;
+  const total=Object.keys(quizAnswers).length||1;
+  const pct=Math.round((trues/total)*100);
+  dayScores[dayNum]=pct;quizDone=true;
+  const sp=document.getElementById('scorePanel');
+  if(sp){
+    sp.classList.add('show');
+    document.getElementById('sp-num').textContent=trues+'/'+total;
+    document.getElementById('sp-fill').style.width=pct+'%';
+    let emoji,msg;
+    if(pct>=90){emoji='🏆';msg='LUAR BIASA! Kamu bersedia untuk Exam!';}
+    else if(pct>=70){emoji='🌟';msg='Bagus! Ulang kaji lagi untuk mantapkan!';}
+    else if(pct>=50){emoji='👍';msg='Usaha yang baik! Cuba lagi sebelum Exam!';}
+    else{emoji='💪';msg='Ulang kaji lagi ya! Kamu boleh!';}
+    document.getElementById('sp-emoji').textContent=emoji;
+    document.getElementById('sp-msg').textContent=msg;
+    document.querySelectorAll('.star-item').forEach((s,i)=>{
+      if(i<(pct>=90?3:pct>=70?2:1)) setTimeout(()=>s.classList.add('lit'),(i+1)*300);
+    });
+    if(pct>=70) launchConf();
+  }
+  stopTimer();renderDayPicker();renderWeekProgress();
+  const nb=document.getElementById('nextDayBtn');if(nb) nb.style.display='block';
+  const sb=document.getElementById('submitBtn');if(sb) sb.style.display='none';
+}
+
+function submitDay6(){
+  submitDay(6);
+  setTimeout(()=>{
+    const rs=document.getElementById('reportSection');
+    if(rs){rs.style.display='block';generateReport();}
+  },400);
+}
+
+function generateReport(){
+  const scores=Object.values(dayScores).filter(v=>v!==null);
+  const avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;
+  document.getElementById('rpt-avg').textContent=avg+'%';
+  const grade=avg>=90?'A+':avg>=80?'A':avg>=70?'B+':avg>=60?'B':avg>=50?'C':'D';
+  const gradeEl=document.getElementById('rpt-grade');
+  gradeEl.textContent=grade;
+  gradeEl.className='grade-tag '+(avg>=70?'gA':avg>=60?'gB':avg>=50?'gC':'gD');
+  document.getElementById('rpt-days').textContent=scores.length+' / 7 hari';
+  document.getElementById('rpt-date').textContent=new Date().toLocaleDateString('ms-MY',{year:'numeric',month:'long',day:'numeric'});
+  document.getElementById('sf-si').style.width=Math.min(avg+10,100)+'%';
+  document.getElementById('sf-bu').style.width=Math.min(avg+5,100)+'%';
+  document.getElementById('sf-di').style.width=Math.max(avg,20)+'%';
+  document.getElementById('sf-am').style.width=Math.max(avg-5,20)+'%';
+  let note;
+  if(avg>=80) note='Tahniah! Anak anda telah <strong>menguasai Bulan 1</strong> dengan cemerlang. Sangat bersedia untuk Bulan 2!';
+  else if(avg>=60) note='Anak anda menunjukkan <strong>kemajuan yang baik</strong>. Galakkan ulang kaji sebelum ke Bulan 2.';
+  else note='Anak anda perlu <strong>lebih banyak latihan</strong>. Sila ulang Minggu 1-3 sebelum teruskan.';
+  document.getElementById('rpt-note').innerHTML='<strong>💬 Nota Cikgu:</strong><br>'+note;
+}
+
+function shareReport(){
+  const scores=Object.values(dayScores).filter(v=>v!==null);
+  const avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;
+  const grade=avg>=90?'A+':avg>=80?'A':avg>=70?'B+':avg>=60?'B':avg>=50?'C':'D';
+  const nm=studentName||'Murid';
+  const msg=encodeURIComponent(
+    '📊 *Laporan Kemajuan BM – Ohsem SiBuDiAM*\n\n'+
+    '👦 Nama: '+nm+'\n'+
+    '📚 Modul: Minggu 4 – Exam Bulan 1\n'+
+    '📅 Hari diselesaikan: '+scores.length+' / 7\n'+
+    '🎯 Purata Markah: '+avg+'% (Gred '+grade+')\n\n'+
+    '✨ Terima kasih kerana menyokong pembelajaran anak di rumah!\n'+
+    '📱 Cikgu Zainal | Ohsem BM'
+  );
+  window.open('https://wa.me/60132372636?text='+msg,'_blank');
+}
+
+function shareCert(){
+  const scores=Object.values(dayScores).filter(v=>v!==null);
+  const avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;
+  const nm=studentName||'Murid';
+  const msg=encodeURIComponent(
+    '🏅 *Sijil Pencapaian Bulan 1 – Ohsem BM*\n\n'+
+    '🎓 Tahniah! '+nm+' telah berjaya menyiapkan\n'+
+    '*SiBuDiAM Bulan 1 – 3 Minggu Penuh!*\n\n'+
+    '📅 Hari Diselesaikan: '+scores.length+' / 7\n'+
+    '🎯 Purata Markah: '+avg+'%\n'+
+    '⭐⭐⭐ Pencapaian Luar Biasa!\n\n'+
+    '✨ *Ohsem BM* – Belajar dengan Seronok!\n'+
+    '📱 Cikgu Zainal'
+  );
+  window.open('https://wa.me/?text='+msg,'_blank');
+}
+
+function updateCertName(val){
+  studentName=val;
+  const cn=document.getElementById('certName');if(cn) cn.textContent=val||'_______________';
+  const cf=document.getElementById('certNameFooter');if(cf) cf.textContent=val||'_______________';
+}
+
+function checkUnlock(){
+  const code=document.getElementById('unlockCode').value.trim().toUpperCase();
+  const msg=document.getElementById('unlockMsg');
+  if(code==='OHSEM5'){
+    msg.style.cssText='font-size:13px;font-weight:800;margin-top:8px;padding:8px;border-radius:10px;background:#D1FAE5;color:#065F46;';
+    msg.textContent='✅ Kod betul! Membuka Bulan 2...';
+    setTimeout(()=>window.location.href='ohsem_minggu5_makanan.html',1500);
+  } else if(code.length>0){
+    msg.style.cssText='font-size:13px;font-weight:800;margin-top:8px;padding:8px;border-radius:10px;background:#FEE2E2;color:#991B1B;';
+    msg.textContent='❌ Kod tidak betul. Hubungi Cikgu Zainal. 📱';
+  }
+}
+
+function upgradeWhatsApp(){
+  const nm=studentName||'Ibu bapa';
+  const msg=encodeURIComponent(
+    '🌟 *Saya berminat untuk naik taraf ke Pakej Premium Ohsem BM!*\n\n'+
+    '👦 Nama murid: '+(studentName||'___')+'\n'+
+    '📚 Sudah selesai: Bulan 1 (Minggu 1-4)\n\n'+
+    'Boleh berikan maklumat lanjut pakej premium?\n\n'+
+    '#OhsemBM #CikguZainalBM'
+  );
+  window.open('https://wa.me/60132372636?text='+msg,'_blank');
+}
+
+function launchConf(){
+  const w=document.getElementById('confWrap');w.style.display='block';w.innerHTML='';
+  const cols=['#F59E0B','#FFD23F','#7B5EA7','#FF6B35','#06D6A0','#FF6B9D'];
+  for(let i=0;i<80;i++){
+    const el=document.createElement('div');el.className='conf-p';
+    el.style.cssText=`left:${Math.random()*100}vw;top:-10px;background:${cols[Math.floor(Math.random()*cols.length)]};animation-delay:${Math.random()*2}s;animation-duration:${2+Math.random()*2}s;width:${6+Math.random()*12}px;height:${6+Math.random()*12}px;`;
+    w.appendChild(el);
+  }
+  setTimeout(()=>w.style.display='none',6000);
+}
+
+// ── TIMER CARD ──
+function timerCard(cfg){
+  return `<div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+      <div class="card-title" style="margin-bottom:0">⏱️ Timer 5 Minit</div>
+      <div style="font-size:12px;font-weight:800;color:var(--muted)">${cfg.icon} Hari ${cfg.day} – ${cfg.title}</div>
+    </div>
+    <div class="timer-wrap">
+      <div class="timer-box" id="timerDisplay">5:00</div>
+      <div>
+        <div class="timer-label">Tekan Mula dan buat latihan!</div>
+        <div class="timer-label" style="color:var(--pu);margin-top:2px">Langkah kecil hari ini, ayat OHSEM milik kamu! 🚀</div>
+      </div>
+      <button class="timer-start" onclick="startTimer()">▶ Mula</button>
+    </div>
+  </div>`;
+}
+
+// ── SCORE PANEL ──
+function scorePanelHTML(c1,c2,total){
+  return `<div class="score-panel" id="scorePanel" style="background:linear-gradient(135deg,${c1},${c2});color:white;">
+    <span class="sp-emoji" id="sp-emoji">🎉</span>
+    <div class="sp-num" id="sp-num">0/${total}</div>
+    <div class="sp-label">Markah Hari ${currentDay}</div>
+    <div class="stars-earned"><span class="star-item">⭐</span><span class="star-item">⭐</span><span class="star-item">⭐</span></div>
+    <div class="sp-msg" id="sp-msg">Tahniah!</div>
+    <div class="sp-bar"><div class="sp-fill" id="sp-fill" style="width:0%"></div></div>
+  </div>`;
+}
+
+// ── RENDER CONTENT ──
+function renderContent(){
+  const cfg=dayConfig[currentDay-1];
+  const q=quotes[currentDay-1];
+  let html=`<div class="quote-box"><div class="quote-text">${q.text}</div><div class="quote-auth">${q.auth}</div></div>`;
+  html+=timerCard(cfg);
+  if(currentDay===1) html+=renderDay1();
+  else if(currentDay===2) html+=renderDay2();
+  else if(currentDay===3) html+=renderDay3();
+  else if(currentDay===4) html+=renderDay4();
+  else if(currentDay===5) html+=renderDay5();
+  else if(currentDay===6) html+=renderDay6();
+  else if(currentDay===7) html+=renderDay7();
+  document.getElementById('mainContent').innerHTML=html;
+}
+
+// ── DAY 1: ULANG KAJI MINGGU 1 (Keluarga) ──
+function renderDay1(){return `
+  <div class="card">
+    <div class="card-title">📖 Ulang Kaji Minggu 1 – Keluarga Saya</div>
+    <div class="sib-mini">
+      <span class="sib-chip sc-si">👤 Si = Siapa</span>
+      <span class="sib-chip sc-bu">🏃 Bu = Buat Apa</span>
+    </div>
+    <div class="review-grid">
+      <div class="review-card rc-1">
+        <div class="rc-title">✅ Yang Kita Belajar</div>
+        <div class="rc-eg"><span class="hl">Ibu</span> memasak.<br><span class="hl">Ayah</span> membaca.<br><span class="hl">Kakak</span> tidur di bilik.</div>
+      </div>
+    </div>
+    <div class="tip"><strong>Ingat!</strong> Si = nama orang. Bu = kata kerja (apa yang dilakukan).</div>
+  </div>
+  <div class="card">
+    <div class="card-title">✏️ Soalan Ulang Kaji – 3 Soalan</div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">1</span> "Ibu" dalam teknik SiBuDiAM ialah unsur...</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d1q1','Si (Siapa)','Si (Siapa)')">Si (Siapa) ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d1q1','Bu (Buat Apa)','Si (Siapa)')">Bu (Buat Apa)</button>
+        <button class="opt" onclick="selectOpt(this,'d1q1','Di (Di Mana)','Si (Siapa)')">Di (Di Mana)</button>
+        <button class="opt" onclick="selectOpt(this,'d1q1','A (Alat)','Si (Siapa)')">A (Alat)</button>
+      </div>
+      <div class="fb" id="fb-d1q1"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">2</span> "Memasak" dalam ayat "Ibu memasak" ialah unsur...</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d1q2','Bu (Buat Apa)','Bu (Buat Apa)')">Bu (Buat Apa) ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d1q2','Si (Siapa)','Bu (Buat Apa)')">Si (Siapa)</button>
+        <button class="opt" onclick="selectOpt(this,'d1q2','Di (Di Mana)','Bu (Buat Apa)')">Di (Di Mana)</button>
+        <button class="opt" onclick="selectOpt(this,'d1q2','A (Alat)','Bu (Buat Apa)')">A (Alat)</button>
+      </div>
+      <div class="fb" id="fb-d1q2"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">3</span> Bina ayat Si + Bu tentang ahli keluarga kamu:</div>
+      <input class="wi" id="d1q3" placeholder="Contoh: Ayah membaca. / Kakak menyanyi." onchange="checkWrite(this,['ibu','ayah','kakak','adik','abang','nenek','datuk','bapa','emak'],'d1q3')">
+      <div class="fb" id="fb-d1q3"></div>
+    </div>
+  </div>
+  ${scorePanelHTML('#FF6B35','#FFD23F',3)}
+  <button class="btn-main btn-pu" id="submitBtn" onclick="submitDay(1)">Hantar Hari 1 🚀</button>
+  <button class="btn-main btn-gr" id="nextDayBtn" style="display:none" onclick="switchDay(2)">Terus ke Hari 2 ➡️</button>`;}
+
+// ── DAY 2: ULANG KAJI MINGGU 2 (Sekolah) ──
+function renderDay2(){return `
+  <div class="card">
+    <div class="card-title">📖 Ulang Kaji Minggu 2 – Sekolah Saya</div>
+    <div class="sib-mini">
+      <span class="sib-chip sc-si">👤 Si</span>
+      <span class="sib-chip sc-bu">🏃 Bu</span>
+      <span class="sib-chip sc-di">📍 Di = Di Mana</span>
+    </div>
+    <div class="review-grid">
+      <div class="review-card rc-2">
+        <div class="rc-title">✅ Yang Kita Belajar</div>
+        <div class="rc-eg"><span class="hl">Guru</span> mengajar <span class="hl-di">di dalam kelas</span>.<br><span class="hl">Murid</span> makan <span class="hl-di">di kantin</span>.<br><span class="hl">Adik</span> berlari <span class="hl-di">di padang sekolah</span>.</div>
+      </div>
+    </div>
+    <div class="tip"><strong>Ingat!</strong> "Di" = tempat. Guna "di" sebelum nama tempat.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">✏️ Soalan Ulang Kaji – 3 Soalan</div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">1</span> "Di dalam kelas" dalam SiBuDiAM ialah unsur...</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d2q1','Di (Di Mana)','Di (Di Mana)')">Di (Di Mana) ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d2q1','Si (Siapa)','Di (Di Mana)')">Si (Siapa)</button>
+        <button class="opt" onclick="selectOpt(this,'d2q1','Bu (Buat Apa)','Di (Di Mana)')">Bu (Buat Apa)</button>
+        <button class="opt" onclick="selectOpt(this,'d2q1','A (Alat)','Di (Di Mana)')">A (Alat)</button>
+      </div>
+      <div class="fb" id="fb-d2q1"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">2</span> Di manakah murid biasanya membaca buku?</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d2q2','di perpustakaan','di perpustakaan')">di perpustakaan 📚</button>
+        <button class="opt" onclick="selectOpt(this,'d2q2','di lautan','di perpustakaan')">di lautan 🌊</button>
+        <button class="opt" onclick="selectOpt(this,'d2q2','di atas awan','di perpustakaan')">di atas awan ☁️</button>
+        <button class="opt" onclick="selectOpt(this,'d2q2','di gunung','di perpustakaan')">di gunung ⛰️</button>
+      </div>
+      <div class="fb" id="fb-d2q2"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">3</span> Bina ayat Si + Bu + Di tentang aktiviti di sekolah:</div>
+      <input class="wi" id="d2q3" placeholder="Contoh: Murid belajar di dalam kelas." onchange="checkWrite(this,['di ','sekolah','kelas','kantin','padang','perpustakaan'],'d2q3')">
+      <div class="fb" id="fb-d2q3"></div>
+    </div>
+  </div>
+  ${scorePanelHTML('#118AB2','#06D6A0',3)}
+  <button class="btn-main btn-pu" id="submitBtn" onclick="submitDay(2)">Hantar Hari 2 🚀</button>
+  <button class="btn-main btn-gr" id="nextDayBtn" style="display:none" onclick="switchDay(3)">Terus ke Hari 3 ➡️</button>`;}
+
+// ── DAY 3: ULANG KAJI MINGGU 3 (Haiwan) ──
+function renderDay3(){return `
+  <div class="card">
+    <div class="card-title">📖 Ulang Kaji Minggu 3 – Haiwan Peliharaan</div>
+    <div class="sib-mini">
+      <span class="sib-chip sc-si">👤 Si</span>
+      <span class="sib-chip sc-bu">🏃 Bu</span>
+      <span class="sib-chip sc-di">📍 Di</span>
+      <span class="sib-chip sc-a">🔧 A = Alat</span>
+    </div>
+    <div class="review-grid">
+      <div class="review-card rc-3">
+        <div class="rc-title">✅ Yang Kita Belajar</div>
+        <div class="rc-eg"><span class="hl">Kakak</span> menyikat kucing <span class="hl-di">di bilik</span> menggunakan <span class="hl-a">sikat</span>.<br><span class="hl">Abang</span> memandikan anjing <span class="hl-di">di luar</span> menggunakan <span class="hl-a">syampu</span>.</div>
+      </div>
+    </div>
+    <div class="tip"><strong>Ingat!</strong> "A" = Alat. Guna perkataan "menggunakan" sebelum nama alat.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">✏️ Soalan Ulang Kaji – 3 Soalan</div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">1</span> Alat apa yang digunakan untuk menyikat kucing?</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d3q1','sikat','sikat')">sikat 🪮</button>
+        <button class="opt" onclick="selectOpt(this,'d3q1','pensel','sikat')">pensel ✏️</button>
+        <button class="opt" onclick="selectOpt(this,'d3q1','bola','sikat')">bola ⚽</button>
+        <button class="opt" onclick="selectOpt(this,'d3q1','buku','sikat')">buku 📚</button>
+      </div>
+      <div class="fb" id="fb-d3q1"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">2</span> "Kakak menyikat kucing di bilik menggunakan sikat." — Unsur "A" ialah...</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d3q2','sikat','sikat')">sikat 🪮</button>
+        <button class="opt" onclick="selectOpt(this,'d3q2','Kakak','sikat')">Kakak</button>
+        <button class="opt" onclick="selectOpt(this,'d3q2','menyikat','sikat')">menyikat</button>
+        <button class="opt" onclick="selectOpt(this,'d3q2','di bilik','sikat')">di bilik</button>
+      </div>
+      <div class="fb" id="fb-d3q2"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">3</span> Bina ayat Si + Bu + Di + A tentang haiwan peliharaan:</div>
+      <input class="wi" id="d3q3" placeholder="Contoh: Adik memberi arnab makan lobak di taman menggunakan tangan." onchange="checkWrite(this,['menggunakan','guna'],'d3q3')">
+      <div class="fb" id="fb-d3q3"></div>
+    </div>
+  </div>
+  ${scorePanelHTML('#06D6A0','#059669',3)}
+  <button class="btn-main btn-pu" id="submitBtn" onclick="submitDay(3)">Hantar Hari 3 🚀</button>
+  <button class="btn-main btn-gr" id="nextDayBtn" style="display:none" onclick="switchDay(4)">Terus ke Hari 4 ➡️</button>`;}
+
+// ── DAY 4: LATIHAN GABUNGAN ──
+function renderDay4(){return `
+  <div class="card">
+    <div class="card-title">✏️ Latihan Gabungan – Semua Unsur!</div>
+    <div class="sib-mini">
+      <span class="sib-chip sc-si">👤 Si</span>
+      <span class="sib-chip sc-bu">🏃 Bu</span>
+      <span class="sib-chip sc-di">📍 Di</span>
+      <span class="sib-chip sc-a">🔧 A</span>
+    </div>
+    <div class="tip"><strong>Gabungan 3 minggu!</strong> Tunjukkan semua yang kamu dah belajar. Cuba guna 3-4 unsur dalam setiap ayat!</div>
+  </div>
+  <div class="card">
+    <div class="card-title">✏️ 5 Soalan Gabungan</div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">1</span> Pilih ayat yang PALING lengkap:</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d4q1','Ibu memasak di dapur menggunakan periuk.','Ibu memasak di dapur menggunakan periuk.')">Ibu memasak di dapur menggunakan periuk. ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d4q1','Ibu memasak.','Ibu memasak di dapur menggunakan periuk.')">Ibu memasak.</button>
+        <button class="opt" onclick="selectOpt(this,'d4q1','Ibu memasak di dapur.','Ibu memasak di dapur menggunakan periuk.')">Ibu memasak di dapur.</button>
+        <button class="opt" onclick="selectOpt(this,'d4q1','Memasak di dapur.','Ibu memasak di dapur menggunakan periuk.')">Memasak di dapur.</button>
+      </div>
+      <div class="fb" id="fb-d4q1"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">2</span> "Murid belajar di dalam kelas." — Berapa unsur SiBuDiAM ada dalam ayat ini?</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d4q2','3 unsur (Si+Bu+Di)','3 unsur (Si+Bu+Di)')">3 unsur (Si+Bu+Di) ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d4q2','2 unsur (Si+Bu)','3 unsur (Si+Bu+Di)')">2 unsur (Si+Bu)</button>
+        <button class="opt" onclick="selectOpt(this,'d4q2','4 unsur (Si+Bu+Di+A)','3 unsur (Si+Bu+Di)')">4 unsur (Si+Bu+Di+A)</button>
+        <button class="opt" onclick="selectOpt(this,'d4q2','1 unsur sahaja','3 unsur (Si+Bu+Di)')">1 unsur sahaja</button>
+      </div>
+      <div class="fb" id="fb-d4q2"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">3</span> Isi: "Kakak menyikat kucing ___ bilik menggunakan sikat."</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d4q3','di','di')">di ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d4q3','ke','di')">ke</button>
+        <button class="opt" onclick="selectOpt(this,'d4q3','dari','di')">dari</button>
+        <button class="opt" onclick="selectOpt(this,'d4q3','dan','di')">dan</button>
+      </div>
+      <div class="fb" id="fb-d4q3"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">4</span> Isi: "Guru mengajar ___ dalam kelas menggunakan ___."</div>
+      <input class="wi" id="d4q4" placeholder="di... menggunakan..." onchange="checkWrite(this,['di','menggunakan'],'d4q4')">
+      <div class="fb" id="fb-d4q4"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">5</span> Bina ayat TERBAIK kamu menggunakan Si + Bu + Di + A:</div>
+      <textarea class="wi" id="d4q5" rows="2" placeholder="Ayat paling ohsem — guna 4 unsur!" onchange="checkWrite(this,['di ','menggunakan','guna'],'d4q5')"></textarea>
+      <div class="fb" id="fb-d4q5"></div>
+    </div>
+  </div>
+  ${scorePanelHTML('#7B5EA7','#F59E0B',5)}
+  <button class="btn-main btn-pu" id="submitBtn" onclick="submitDay(4)">Hantar Hari 4 🚀</button>
+  <button class="btn-main btn-gr" id="nextDayBtn" style="display:none" onclick="switchDay(5)">Terus ke Hari 5 – Exam! ➡️</button>`;}
+
+// ── DAY 5: EXAM ONLINE (WAYGROUND) ──
+function renderDay5(){return `
+  <div class="exam-banner">
+    <div style="font-size:40px;margin-bottom:8px">🎯</div>
+    <h2>Hari Exam! Kamu Boleh!</h2>
+    <p>Exam Bulan 1 – Ohsem BM SiBuDiAM</p>
+  </div>
+  <div class="card">
+    <div class="card-title">📋 Arahan Exam</div>
+    <div class="exam-steps">
+      <div class="exam-step">
+        <div class="es-num">1</div>
+        <div class="es-text">Pastikan kamu sudah habis ulang kaji Hari 1-4 ✅</div>
+      </div>
+      <div class="exam-step">
+        <div class="es-num">2</div>
+        <div class="es-text">Tekan butang di bawah untuk buka Exam Wayground</div>
+      </div>
+      <div class="exam-step">
+        <div class="es-num">3</div>
+        <div class="es-text">Jawab semua soalan dengan teliti</div>
+      </div>
+      <div class="exam-step">
+        <div class="es-num">4</div>
+        <div class="es-text">Selepas selesai, kembali ke sini dan tekan "Dah Selesai Exam"</div>
+      </div>
+    </div>
+    <div class="wayground-box">
+      <div class="wb-title">🎮 Exam Wayground — Ciri Premium</div>
+      <ul class="wb-list">
+        <li>Soalan pelbagai jenis (drag-drop, audio, video)</li>
+        <li>Markah keluar terus selepas selesai</li>
+        <li>Laporan lengkap dihantar ke email ibu bapa</li>
+        <li>Badge digital eksklusif untuk markah tinggi</li>
+      </ul>
+    </div>
+    <button class="btn-main btn-gold" onclick="window.open('https://wayground.com','_blank')">
+      🎯 Buka Exam Wayground
+    </button>
+    <div style="text-align:center;font-size:11px;font-weight:700;color:var(--muted);margin-top:8px;">
+      * Exam Wayground adalah ciri pakej Premium sahaja
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">✏️ Latihan Ringkas Sambil Tunggu</div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">1</span> SiBuDiAM ada berapa unsur?</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d5q1','5 unsur','5 unsur')">5 unsur ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d5q1','3 unsur','5 unsur')">3 unsur</button>
+        <button class="opt" onclick="selectOpt(this,'d5q1','7 unsur','5 unsur')">7 unsur</button>
+        <button class="opt" onclick="selectOpt(this,'d5q1','4 unsur','5 unsur')">4 unsur</button>
+      </div>
+      <div class="fb" id="fb-d5q1"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">2</span> Bina ayat menggunakan semua yang kamu dah belajar (Si+Bu+Di+A):</div>
+      <textarea class="wi" id="d5q2" rows="2" placeholder="Ayat terbaik kamu bulan ini!" onchange="checkWrite(this,['di ','menggunakan','guna'],'d5q2')"></textarea>
+      <div class="fb" id="fb-d5q2"></div>
+    </div>
+  </div>
+  ${scorePanelHTML('#F59E0B','#7B5EA7',2)}
+  <button class="btn-main btn-pu" id="submitBtn" onclick="submitDay(5)">✅ Dah Selesai Exam</button>
+  <button class="btn-main btn-gr" id="nextDayBtn" style="display:none" onclick="switchDay(6)">Terus ke Hari 6 ➡️</button>`;}
+
+// ── DAY 6: KUIZ OHSEM KAMU ──
+function renderDay6(){return `
+  <div class="card">
+    <div class="card-title">🏆 Kuiz OHSEM Kamu! – 7 Soalan</div>
+    <div class="tip"><strong>Kuiz terakhir Bulan 1!</strong> Ini peluang kamu tunjukkan semua kehebatan Si+Bu+Di+A! 💪</div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">1</span> Formula ayat lengkap yang kita dah belajar bulan ini ialah...</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d6q1','Si + Bu + Di + A','Si + Bu + Di + A')">Si + Bu + Di + A ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d6q1','Si + Bu sahaja','Si + Bu + Di + A')">Si + Bu sahaja</button>
+        <button class="opt" onclick="selectOpt(this,'d6q1','Di + A sahaja','Si + Bu + Di + A')">Di + A sahaja</button>
+        <button class="opt" onclick="selectOpt(this,'d6q1','Si sahaja','Si + Bu + Di + A')">Si sahaja</button>
+      </div>
+      <div class="fb" id="fb-d6q1"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">2</span> "Guru" dalam ayat "Guru mengajar di kelas" ialah unsur...</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d6q2','Si (Siapa)','Si (Siapa)')">Si (Siapa) ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d6q2','Bu (Buat Apa)','Si (Siapa)')">Bu (Buat Apa)</button>
+        <button class="opt" onclick="selectOpt(this,'d6q2','Di (Di Mana)','Si (Siapa)')">Di (Di Mana)</button>
+        <button class="opt" onclick="selectOpt(this,'d6q2','A (Alat)','Si (Siapa)')">A (Alat)</button>
+      </div>
+      <div class="fb" id="fb-d6q2"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">3</span> "Di kantin" dalam ayat "Murid makan di kantin" ialah unsur...</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d6q3','Di (Di Mana)','Di (Di Mana)')">Di (Di Mana) ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d6q3','Si (Siapa)','Di (Di Mana)')">Si (Siapa)</button>
+        <button class="opt" onclick="selectOpt(this,'d6q3','Bu (Buat Apa)','Di (Di Mana)')">Bu (Buat Apa)</button>
+        <button class="opt" onclick="selectOpt(this,'d6q3','A (Alat)','Di (Di Mana)')">A (Alat)</button>
+      </div>
+      <div class="fb" id="fb-d6q3"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">4</span> "Sikat" dalam ayat "Kakak menyikat kucing menggunakan sikat" ialah unsur...</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d6q4','A (Alat)','A (Alat)')">A (Alat) ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d6q4','Si (Siapa)','A (Alat)')">Si (Siapa)</button>
+        <button class="opt" onclick="selectOpt(this,'d6q4','Bu (Buat Apa)','A (Alat)')">Bu (Buat Apa)</button>
+        <button class="opt" onclick="selectOpt(this,'d6q4','Di (Di Mana)','A (Alat)')">Di (Di Mana)</button>
+      </div>
+      <div class="fb" id="fb-d6q4"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">5</span> Pilih ayat yang PALING lengkap:</div>
+      <div class="opts">
+        <button class="opt" onclick="selectOpt(this,'d6q5','Ayah membaca akhbar di ruang tamu menggunakan cermin mata.','Ayah membaca akhbar di ruang tamu menggunakan cermin mata.')">Ayah membaca akhbar di ruang tamu menggunakan cermin mata. ✅</button>
+        <button class="opt" onclick="selectOpt(this,'d6q5','Ayah membaca.','Ayah membaca akhbar di ruang tamu menggunakan cermin mata.')">Ayah membaca.</button>
+        <button class="opt" onclick="selectOpt(this,'d6q5','Ayah membaca di ruang tamu.','Ayah membaca akhbar di ruang tamu menggunakan cermin mata.')">Ayah membaca di ruang tamu.</button>
+        <button class="opt" onclick="selectOpt(this,'d6q5','Membaca akhbar ruang tamu.','Ayah membaca akhbar di ruang tamu menggunakan cermin mata.')">Membaca akhbar ruang tamu.</button>
+      </div>
+      <div class="fb" id="fb-d6q5"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">6</span> Bina ayat Si + Bu + Di tentang keluarga atau sekolah kamu:</div>
+      <input class="wi" id="d6q6" placeholder="Contoh: Murid belajar di dalam kelas." onchange="checkWrite(this,['di '],'d6q6')">
+      <div class="fb" id="fb-d6q6"></div>
+    </div>
+    <div class="q-wrap">
+      <div class="q-text"><span class="q-num">7</span> Bina ayat TERBAIK kamu menggunakan Si + Bu + Di + A:</div>
+      <textarea class="wi" id="d6q7" rows="2" placeholder="Ayat paling ohsem bulan ini!" onchange="checkWrite(this,['menggunakan','guna','di '],'d6q7')"></textarea>
+      <div class="fb" id="fb-d6q7"></div>
+    </div>
+  </div>
+  <div class="score-panel" id="scorePanel" style="background:linear-gradient(135deg,#F59E0B,#7B5EA7);color:white;">
+    <span class="sp-emoji" id="sp-emoji">🏆</span>
+    <div class="sp-num" id="sp-num">0/7</div>
+    <div class="sp-label">Markah Kuiz OHSEM Bulan 1</div>
+    <div class="stars-earned"><span class="star-item">⭐</span><span class="star-item">⭐</span><span class="star-item">⭐</span></div>
+    <div class="sp-msg" id="sp-msg">Tahniah!</div>
+    <div class="sp-bar"><div class="sp-fill" id="sp-fill" style="width:0%"></div></div>
+  </div>
+  <div id="reportSection" style="display:none">
+    <div style="border-radius:var(--rad);overflow:hidden;margin-bottom:14px;box-shadow:var(--shad);">
+      <div class="rpt-hdr"><div style="font-size:32px">📋</div><h2>Laporan Ibu Bapa</h2><p>Ohsem BM · Bulan 1 · Minggu 1-4</p></div>
+      <div class="rpt-body">
+        <div class="rpt-row"><span class="rpt-key">Tarikh</span><span class="rpt-val" id="rpt-date">—</span></div>
+        <div class="rpt-row"><span class="rpt-key">Hari Selesai</span><span class="rpt-val" id="rpt-days">—</span></div>
+        <div class="rpt-row"><span class="rpt-key">Purata Markah</span><span class="rpt-val" id="rpt-avg">—</span></div>
+        <div class="rpt-row"><span class="rpt-key">Gred</span><span class="rpt-val"><span class="grade-tag" id="rpt-grade">—</span></span></div>
+        <div style="margin-top:14px;font-size:12px;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">Kemahiran SiBuDiAM</div>
+        <div class="skill-row">
+          <div class="sk sk-si"><div class="si">👤</div><div class="sn">Siapa (Si)</div><div class="sb"><div class="sf sf-si" id="sf-si" style="width:0%"></div></div></div>
+          <div class="sk sk-bu"><div class="si">🏃</div><div class="sn">Buat Apa (Bu)</div><div class="sb"><div class="sf sf-bu" id="sf-bu" style="width:0%"></div></div></div>
+          <div class="sk sk-di"><div class="si">📍</div><div class="sn">Di Mana (Di)</div><div class="sb"><div class="sf sf-di" id="sf-di" style="width:0%"></div></div></div>
+          <div class="sk sk-am"><div class="si">🔧</div><div class="sn">Alat (A)</div><div class="sb"><div class="sf sf-am" id="sf-am" style="width:0%"></div></div></div>
+        </div>
+        <div class="note-box" id="rpt-note"></div>
+      </div>
+    </div>
+    <button class="btn-main btn-wa" onclick="shareReport()">📲 Kongsikan ke WhatsApp Ibu Bapa</button>
+    <button class="btn-main btn-gold" style="margin-top:8px" onclick="switchDay(7);setTimeout(()=>window.scrollTo({top:0,behavior:'smooth'}),150)">🏅 Ambil Sijil Bulan 1 ➡️</button>
+  </div>
+  <button class="btn-main btn-pu" id="submitBtn" onclick="submitDay6()">Hantar Kuiz OHSEM 🚀</button>`;}
+
+// ── DAY 7: SIJIL BULAN 1 + UPGRADE ──
+function renderDay7(){
+  const nm=studentName||'_______________';
+  const today=new Date().toLocaleDateString('ms-MY',{year:'numeric',month:'long',day:'numeric'});
+  const scores=Object.values(dayScores).filter(v=>v!==null);
+  const avg=scores.length?Math.round(scores.reduce((a,b)=>a+b,0)/scores.length):0;
+  return `
+  <div class="card">
+    <div class="card-title">🏅 Sijil Bulan 1 – Tahniah!</div>
+    <div class="tip" style="background:#FEF3C7;border-left-color:var(--gold)"><strong>🌟 Tahniah selesaikan Bulan 1!</strong> Kamu dah kuasai Si, Bu, Di, dan A dalam 4 minggu!</div>
+    <div style="margin-bottom:12px;">
+      <div style="font-size:13px;font-weight:800;color:var(--muted);margin-bottom:6px;">✏️ Nama murid untuk sijil:</div>
+      <input class="name-input" id="nameInput" placeholder="Tulis nama penuh murid di sini..." oninput="updateCertName(this.value)">
+    </div>
+  </div>
+
+  <div class="cert">
+    <span class="cert-logo">🏅</span>
+    <div class="cert-title">Sijil Pencapaian</div>
+    <div class="cert-subtitle">Ohsem BM · SiBuDiAM · Bulan 1</div>
+    <div class="cert-month">📅 Bulan 1 – Minggu 1 hingga 4</div>
+    <p style="font-size:12px;font-weight:700;color:var(--muted)">Ini adalah untuk mengiktiraf bahawa</p>
+    <div class="cert-name" id="certName">${nm}</div>
+    <div class="cert-desc">
+      telah berjaya menyiapkan<br>
+      <strong>Bulan 1 – Ohsem BM SiBuDiAM</strong><br>
+      merangkumi Tema Keluarga, Sekolah, Haiwan Peliharaan<br>
+      dan lulus Exam Bulan 1 dengan cemerlang.
+    </div>
+    <div class="cert-badges">
+      <span class="cert-badge cb1">✅ 4 Minggu Selesai</span>
+      <span class="cert-badge cb2">🎯 Purata ${avg}%</span>
+      <span class="cert-badge cb3">👤 Si · 🏃 Bu</span>
+      <span class="cert-badge cb4">📍 Di · 🔧 A</span>
+    </div>
+    <div class="cert-stars">⭐⭐⭐</div>
+    <div class="cert-footer">
+      <div class="cert-sign">
+        <div class="cs-line" style="position:relative;">
+          <span style="position:absolute;bottom:6px;left:50%;transform:translateX(-50%);font-size:18px;">✍️</span>
+        </div>
+        <div class="cs-name">CIKGU ZAINAL ZULHILMI<br><span style="color:var(--gold2)">Ohsem BM</span></div>
+      </div>
+      <div style="text-align:center;">
+        <div style="font-size:10px;font-weight:700;color:var(--muted);">📅 TARIKH</div>
+        <div style="font-size:11px;font-weight:900;color:var(--text);margin-top:2px;">${today}</div>
+      </div>
+      <div class="cert-sign">
+        <div class="cs-line"></div>
+        <div class="cs-name" id="certNameFooter" style="color:var(--gold2);">${nm}</div>
+      </div>
+    </div>
+  </div>
+
+  <button class="btn-main btn-wa" onclick="shareCert()">📲 Kongsi Sijil Bulan 1 ke WhatsApp 🎉</button>
+
+  <!-- UPGRADE SECTION -->
+  <div class="upgrade-section" style="margin-top:14px;">
+    <div class="upgrade-badge">🚀 Selesai Fasa Pengenalan!</div>
+    <div class="upgrade-title">Jom Sambung Momentum Belajar Anak Anda!</div>
+    <div class="upgrade-desc">
+      Tahniah kerana konsisten selama 4 minggu!<br>
+      Masih ada <strong>49 minggu lagi</strong> — pilih pakej sambungan anda!
+    </div>
+
+    <!-- KOD AFFILIATE -->
+    <div style="background:rgba(255,255,255,.12);border-radius:14px;padding:14px;margin-bottom:16px;">
+      <div style="font-size:13px;font-weight:800;color:var(--yl);margin-bottom:8px;">🏷️ Ada Kod Diskaun Affiliate?</div>
+      <input id="kodAffiliate" style="width:100%;border:2px solid rgba(255,255,255,.3);border-radius:10px;padding:10px;text-align:center;font-family:'Nunito',sans-serif;font-size:16px;font-weight:900;letter-spacing:3px;outline:none;background:rgba(255,255,255,.1);color:white;" placeholder="Contoh: ROIHAN-MEI" oninput="this.value=this.value.toUpperCase()">
+      <button onclick="semakKodAffiliate()" style="width:100%;margin-top:8px;padding:10px;background:var(--yl);color:#1A1A2E;border:none;border-radius:10px;font-family:'Fredoka One',cursive;font-size:15px;cursor:pointer;">
+        Semak Kod 🔍
+      </button>
+      <div id="affiliateMsg" style="font-size:12px;font-weight:800;margin-top:8px;padding:8px;border-radius:8px;display:none;"></div>
+    </div>
+
+    <!-- 2 PAKEJ SIDE BY SIDE -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;">
+
+      <!-- PAKEJ BASIC -->
+      <div style="background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.25);border-radius:16px;padding:14px;text-align:center;">
+        <div style="font-size:11px;font-weight:900;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;">📦 Pakej Asas</div>
+        <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.4);text-decoration:line-through;" id="hargaAsasAsal">RM15/bulan</div>
+        <div style="font-family:'Fredoka One',cursive;font-size:28px;color:var(--yl);" id="hargaAsasFinal">RM10</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(255,255,255,.6);margin-bottom:10px;">/bulan dengan kod</div>
+        <div style="text-align:left;font-size:11px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:12px;line-height:1.8;">
+          ✅ 53 Minggu HTML<br>
+          ✅ Kod Unlock Mingguan<br>
+          ✅ Laporan WhatsApp<br>
+          ✅ Sijil Digital
+        </div>
+        <button onclick="beliPakej('asas')" style="width:100%;padding:10px;background:white;color:#1A1A2E;border:none;border-radius:10px;font-family:'Fredoka One',cursive;font-size:14px;cursor:pointer;">
+          Pilih Asas 📚
+        </button>
+      </div>
+
+      <!-- PAKEJ PREMIUM -->
+      <div style="background:linear-gradient(135deg,rgba(245,158,11,.3),rgba(217,119,6,.3));border:2px solid var(--yl);border-radius:16px;padding:14px;text-align:center;position:relative;">
+        <div style="position:absolute;top:-10px;left:50%;transform:translateX(-50%);background:var(--yl);color:#1A1A2E;font-size:9px;font-weight:900;padding:2px 10px;border-radius:10px;white-space:nowrap;">👑 90% Pilih Ini</div>
+        <div style="font-size:11px;font-weight:900;color:var(--yl);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;margin-top:4px;">🌟 Premium</div>
+        <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.4);text-decoration:line-through;" id="hargaPremiumAsal">RM25/bulan</div>
+        <div style="font-family:'Fredoka One',cursive;font-size:28px;color:var(--yl);" id="hargaPremiumFinal">RM20</div>
+        <div style="font-size:10px;font-weight:800;color:rgba(255,255,255,.6);margin-bottom:10px;">/bulan dengan kod</div>
+        <div style="text-align:left;font-size:11px;font-weight:700;color:rgba(255,255,255,.8);margin-bottom:12px;line-height:1.8;">
+          ✅ Semua Asas<br>
+          ✅ Kuiz Wayground<br>
+          ✅ Sijil & Badge Canva<br>
+          ✅ Laporan ke Email
+        </div>
+        <button onclick="beliPakej('premium')" style="width:100%;padding:10px;background:var(--yl);color:#1A1A2E;border:none;border-radius:10px;font-family:'Fredoka One',cursive;font-size:14px;cursor:pointer;">
+          Pilih Premium 🌟
+        </button>
+      </div>
+    </div>
+
+    <div style="font-size:11px;font-weight:700;color:rgba(255,255,255,.5);text-align:center;">
+      📱 Pembayaran via DuitNow/TnG · Cikgu Zainal akan sahkan dalam 24 jam
+    </div>
+  </div>
+
+  <!-- UNLOCK CODE -->
+  <div style="background:linear-gradient(135deg,#FFF0EB,#FFF8E1);border-radius:var(--rad);padding:16px;margin-top:12px;text-align:center;box-shadow:var(--shad);">
+    <div style="font-size:22px;margin-bottom:6px;">🔐</div>
+    <div style="font-family:'Fredoka One',cursive;font-size:16px;color:var(--or);margin-bottom:4px;">Dah ada Kod Unlock? Terus ke Bulan 2!</div>
+    <div style="font-size:12px;font-weight:700;color:var(--muted);margin-bottom:10px;">Masukkan kod yang diterima daripada Cikgu Zainal</div>
+    <input id="unlockCode" style="width:100%;border:2px solid var(--yl);border-radius:12px;padding:12px;text-align:center;font-family:'Nunito',sans-serif;font-size:22px;font-weight:900;letter-spacing:6px;outline:none;" placeholder="XXXXXXX" maxlength="10" oninput="this.value=this.value.toUpperCase()">
+    <button class="btn-main btn-or" style="margin-top:10px;" onclick="checkUnlock()">🔓 Buka Bulan 2</button>
+    <div id="unlockMsg" style="font-size:13px;font-weight:800;margin-top:8px;padding:8px;border-radius:10px;"></div>
+  </div>
+
+  <div class="card" style="margin-top:14px;">
+    <div class="card-title">📊 Ringkasan Bulan 1</div>
+    ${dayConfig.slice(0,6).map(d=>`
+      <div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px dashed #F0E8D8;font-size:13px;font-weight:700;">
+        <span>${d.icon} Hari ${d.day} – ${d.title}</span>
+        <span style="color:${dayScores[d.day]!==null?'var(--gr)':'var(--muted)'}">
+          ${dayScores[d.day]!==null?dayScores[d.day]+'%':'—'}
+        </span>
+      </div>`).join('')}
+  </div>`;}
+
+// ── AFFILIATE FUNCTIONS ──
+const SCRIPT_URL='https://script.google.com/macros/s/AKfycbxUCkJrg3PPBXpATBw4q8lLZsKYJNDaOKiu6x8xpyKcuwVszsBg3mm9CTdcQuRmS8TM/exec';
+let affiliateDiskaun=0;
+let affiliateKodSah='';
+
+function semakKodAffiliate(){
+  const kod=document.getElementById('kodAffiliate').value.trim().toUpperCase();
+  const msg=document.getElementById('affiliateMsg');
+  msg.style.display='none';
+  if(!kod){msg.style.cssText='display:block;background:#FEE2E2;color:#991B1B;';msg.textContent='Sila masukkan kod terlebih dahulu.';return;}
+
+  // Semak dengan Apps Script
+  fetch(SCRIPT_URL,{
+    method:'POST',mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({action:'semakKod',kod:kod})
+  }).catch(()=>{});
+
+  // Kod yang sah — Cikgu boleh tambah lebih
+  const kodSah=['ROIHAN-MEI','SARAH-JUN','NORA-MEI','FARID-MEI'];
+  if(kodSah.includes(kod)||kod.length>=8){
+    affiliateDiskaun=5;
+    affiliateKodSah=kod;
+    msg.style.cssText='display:block;background:#D1FAE5;color:#065F46;';
+    msg.textContent='✅ Kod sah! Anda mendapat diskaun RM5!';
+    // Update harga
+    document.getElementById('hargaAsasFinal').textContent='RM10';
+    document.getElementById('hargaPremiumFinal').textContent='RM20';
+  } else {
+    affiliateDiskaun=0;
+    msg.style.cssText='display:block;background:#FEE2E2;color:#991B1B;';
+    msg.textContent='❌ Kod tidak sah. Cuba semula atau hubungi Cikgu Zainal.';
+  }
+}
+
+function beliPakej(pakej){
+  const nm=studentName||'Ibu/Bapa';
+  const hargaAsal=pakej==='premium'?25:15;
+  const hargaBayar=hargaAsal-affiliateDiskaun;
+  const kodRef=affiliateKodSah||'Tiada';
+
+  // Log ke Apps Script
+  fetch(SCRIPT_URL,{
+    method:'POST',mode:'no-cors',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({
+      action:'beliPakej',
+      namaWali:nm,telefon:'',
+      pakej:pakej,kodReferral:kodRef
+    })
+  }).catch(()=>{});
+
+  // WA mesej ke Cikgu
+  const msg=encodeURIComponent(
+    '🛒 *Saya mahu langgan Ohsem BM!*\n\n'+
+    '👦 Nama murid: '+studentName+'\n'+
+    '📦 Pakej: '+(pakej==='premium'?'PREMIUM':'ASAS')+'\n'+
+    '💰 Harga: RM'+hargaBayar+
+    (affiliateDiskaun>0?' (Diskaun RM'+affiliateDiskaun+' – Kod: '+kodRef+')\n':'\n')+
+    '\nSila sahkan pembayaran dan hantar kod unlock. Terima kasih! 🙏'
+  );
+  window.open('https://wa.me/60132372636?text='+msg,'_blank');
+}
+
+// ── INIT ──
+renderDayPicker();
+renderWeekProgress();
+renderContent();
+</script>
+<script>
+document.addEventListener("contextmenu",function(e){e.preventDefault();return false;});
+document.addEventListener("keydown",function(e){if(e.key==="F12"){e.preventDefault();return false;}if(e.ctrlKey&&e.key==="u"){e.preventDefault();return false;}if(e.ctrlKey&&e.shiftKey&&e.key==="I"){e.preventDefault();return false;}if(e.ctrlKey&&e.key==="s"){e.preventDefault();return false;}});
+document.addEventListener("dragstart",function(e){e.preventDefault();return false;});
+</script>
+</body>
+</html>
